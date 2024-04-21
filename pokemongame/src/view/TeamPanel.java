@@ -89,51 +89,32 @@ public class TeamPanel extends JPanel{
 	
 	public void initListeners() {
 		// back logic
-		this.back.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				observer.backFromTeam();
-			}
-		});
+		this.back.addActionListener(e -> observer.backFromTeam());
 		
 		// select from table
-		ActionListener ac = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				resetSlots();
-				final LobbyPokemonButton jb = (LobbyPokemonButton)e.getSource();
-				jb.setEnabled(false);
-				selected = jb;
-				observer.selectPokemon(jb.getPokemonName());
-			}
+		ActionListener ac = e -> {
+			resetSlots();
+			final LobbyPokemonButton jb = (LobbyPokemonButton)e.getSource();
+			jb.setEnabled(false);
+			selected = jb;
+			observer.selectPokemon(jb.getPokemonName());
 		};
 		for(int i = 0; i < observer.getPokedexSize(); i++)
 			this.pokeButtons[i].addActionListener(ac);
 		
-		// select from team
-		ActionListener ac2 = new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				resetSlots();
-				final LobbyPokemonButton jb = (LobbyPokemonButton)e.getSource();
-				selected = jb;
-				observer.selectFromTeam(0, jb.getIndex());
-			}	
+		// select from team	
+		ActionListener ac2 = e ->  {
+			resetSlots();
+			final LobbyPokemonButton jb = (LobbyPokemonButton)e.getSource();
+			selected = jb;
+			observer.selectFromTeam(0, jb.getIndex());
 		};
 		
-		ActionListener ac3 = new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				resetSlots();
-				final LobbyPokemonButton jb = (LobbyPokemonButton)e.getSource();
-				selected = jb;
-				observer.selectFromTeam(1, jb.getIndex());
-			}	
+		ActionListener ac3 = e -> {
+			resetSlots();
+			final LobbyPokemonButton jb = (LobbyPokemonButton)e.getSource();
+			selected = jb;
+			observer.selectFromTeam(1, jb.getIndex());
 		};
 		for(LobbyPokemonButton i : this.teams[0])
 			i.addActionListener(ac2);
@@ -141,70 +122,24 @@ public class TeamPanel extends JPanel{
 			i.addActionListener(ac3);
 		
 		// add logic
-		this.addPokemonLeft.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				observer.addPokemon(0);
-			}
-		});
-		
-		this.addPokemonRight.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				observer.addPokemon(1);
-			}
-		});
+		this.addPokemonLeft.addActionListener(e -> observer.addPokemon(0));
+		this.addPokemonRight.addActionListener(e -> observer.addPokemon(1));
 		
 		// deselect logic
-		this.deselect.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				selected = null;
-				observer.deselect();
-			}
+		this.deselect.addActionListener(e -> {
+			selected = null;
+			observer.deselect();
 		});
 		
 		// info logic
-		this.seePoke.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				observer.infoScreen();
-			}
-		});
+		this.seePoke.addActionListener(e -> observer.infoScreen());
 		
-		// remove logic
-		this.removePokeLeft.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				observer.removePokemon(0);
-			}
-		});
-		
-		this.removePokeRight.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				observer.removePokemon(1);
-			}		
-		});
+		// remove logic		
+		this.removePokeLeft.addActionListener(e -> observer.removePokemon(0));
+		this.removePokeRight.addActionListener(e -> observer.removePokemon(1));
 		
 		// play logic
-		this.play.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				observer.play();
-			}
-			
-		});
+		this.play.addActionListener(e -> observer.play());
 	}
 	
 	public void loadButtons(List<String> pokemonNames, List<String> paths) {
