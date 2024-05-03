@@ -5,7 +5,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class FileManager<X> {
+import interfaces.FileManagerInt;
+
+public abstract class FileManager<X> implements FileManagerInt<X> {
 	private File directory;
 	private List<X> dataList;
 	private List<X> usedData;

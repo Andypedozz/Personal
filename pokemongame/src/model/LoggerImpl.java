@@ -9,12 +9,19 @@ import interfaces.Pair;
 import interfaces.User;
 
 public class LoggerImpl implements Logger{
+	private static LoggerImpl INSTANCE = null;
 	private AccountManager2 fileManager;
 	private boolean logged[];
 	
-	public LoggerImpl(AccountManager2 fileManager) {
-		this.fileManager = fileManager;
+	private LoggerImpl() {
+		this.fileManager = AccountManager2.getInstance();
 		this.logged = new boolean[2];
+	}
+	
+	public static LoggerImpl getInstance() {
+		if(INSTANCE == null)
+			INSTANCE = new LoggerImpl();
+		return INSTANCE;
 	}
 	
 	// metodo per loggare

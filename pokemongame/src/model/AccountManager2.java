@@ -12,7 +12,19 @@ import interfaces.Account;
 import interfaces.User;
 
 public class AccountManager2 extends FileManager<Account>{
-
+	private static AccountManager2 INSTANCE = null;
+	
+	
+	private AccountManager2() {
+		super();
+	}
+	
+	public static AccountManager2 getInstance() {
+		if(INSTANCE == null) {
+			INSTANCE = new AccountManager2();
+		}
+		return INSTANCE;	
+	}
 	
 	@Override
 	public void writeNewFile(Account data) {

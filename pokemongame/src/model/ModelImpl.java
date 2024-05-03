@@ -14,22 +14,24 @@ public class ModelImpl implements Model{
 	private Match match;
 	
 	public ModelImpl(String filepath) {
-		this.fileManager = new AccountManager2();
+		this.fileManager = AccountManager2.getInstance();
 		this.fileManager.openFileDirectory(filepath);
 		this.fileManager.readFromFile();
-		this.logger = new LoggerImpl(fileManager);
+		this.logger = LoggerImpl.getInstance();
 	}
 	
 	@Override
 	public AccountManager2 getAccountManager() {
 		// TODO Auto-generated method stub
 		return this.fileManager;
+			
 	}
 	
 	@Override
 	public Logger getLogger() {
 		// TODO Auto-generated method stub
 		return this.logger;
+			
 	}
 
 	@Override
@@ -52,7 +54,6 @@ public class ModelImpl implements Model{
 	
 	@Override
 	public Match getMatch() {
-		
 		return this.match;
 	}
 
@@ -61,5 +62,4 @@ public class ModelImpl implements Model{
 		// TODO Auto-generated method stub
 		this.lobby = null;
 	}
-	
 }

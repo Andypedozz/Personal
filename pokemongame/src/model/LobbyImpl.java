@@ -63,12 +63,6 @@ public class LobbyImpl implements Lobby{
 	}
 
 	@Override
-	public void switchReady(int select) {
-		// TODO Auto-generated method stub
-		this.ready[select] = (this.ready[select])? false : true;
-	}
-
-	@Override
 	public Pokemon getSelected() {
 		// TODO Auto-generated method stub
 		return this.selectedPokemon;

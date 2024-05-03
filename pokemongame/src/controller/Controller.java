@@ -25,6 +25,12 @@ public class Controller implements ViewObserver{
 	private LeaderboardController leadController;
 
 	// avvio applicazione
+	public static void main(String[] args) {
+		Controller c = new Controller();
+		c.start();
+	}
+	
+	// controller start
 	public void start() {
 		this.model = new ModelImpl("accountdata");
 		this.view = new ViewImpl(this);
@@ -73,11 +79,6 @@ public class Controller implements ViewObserver{
 	public BattleViewObserver getBattleObserver() {
 		// TODO Auto-generated method stub
 		return this.battleController;
-	}
-	
-	public static void main(String[] args) {
-		Controller c = new Controller();
-		c.start();
 	}
 
 	@Override

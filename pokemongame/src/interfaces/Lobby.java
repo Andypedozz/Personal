@@ -5,7 +5,6 @@ import java.util.List;
 public interface Lobby {
 	int addPokemon(int select);
 	int removePokemon(int select);
-	void switchReady(int select);
 	Pokemon getSelected();
 	void deselect();
 	void selectPokemon(String name);
