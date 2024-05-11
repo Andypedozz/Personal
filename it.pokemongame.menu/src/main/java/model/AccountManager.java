@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+<<<<<<< HEAD:it.pokemongame.menu/src/main/java/model/AccountManager.java
 import model.Account;
 import model.User;
 
@@ -21,6 +22,22 @@ public class AccountManager extends FileManagerImpl<Account>{
 	public static AccountManager getInstance() {
 		if(INSTANCE == null) {
 			INSTANCE = new AccountManager();
+=======
+import interfaces.Account;
+import interfaces.User;
+
+public class AccountManager2 extends FileManager<Account>{
+	private static AccountManager2 INSTANCE = null;
+	
+	
+	private AccountManager2() {
+		super();
+	}
+	
+	public static AccountManager2 getInstance() {
+		if(INSTANCE == null) {
+			INSTANCE = new AccountManager2();
+>>>>>>> 61b96edc31c588c32f45f6641c7e8a5232a93412:pokemongame/src/model/AccountManager2.java
 		}
 		return INSTANCE;	
 	}

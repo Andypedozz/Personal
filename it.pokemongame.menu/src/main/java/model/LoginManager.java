@@ -7,6 +7,7 @@ import model.Account;
 import interfaces.FileManager;
 import model.User;
 
+<<<<<<< HEAD:it.pokemongame.menu/src/main/java/model/LoginManager.java
 public class LoginManager {
 	private static LoginManager INSTANCE = null;
 	private AccountManager fileManager;
@@ -20,6 +21,21 @@ public class LoginManager {
 	public static LoginManager getInstance() {
 		if(INSTANCE == null)
 			INSTANCE = new LoginManager();
+=======
+public class LoggerImpl implements Logger{
+	private static LoggerImpl INSTANCE = null;
+	private AccountManager2 fileManager;
+	private boolean logged[];
+	
+	private LoggerImpl() {
+		this.fileManager = AccountManager2.getInstance();
+		this.logged = new boolean[2];
+	}
+	
+	public static LoggerImpl getInstance() {
+		if(INSTANCE == null)
+			INSTANCE = new LoggerImpl();
+>>>>>>> 61b96edc31c588c32f45f6641c7e8a5232a93412:pokemongame/src/model/LoggerImpl.java
 		return INSTANCE;
 	}
 	

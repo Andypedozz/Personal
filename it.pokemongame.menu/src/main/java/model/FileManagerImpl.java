@@ -6,9 +6,15 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+<<<<<<< HEAD:it.pokemongame.menu/src/main/java/model/FileManagerImpl.java
 import interfaces.FileManager;
 
 public abstract class FileManagerImpl<X> implements FileManager<X> {
+=======
+import interfaces.FileManagerInt;
+
+public abstract class FileManager<X> implements FileManagerInt<X> {
+>>>>>>> 61b96edc31c588c32f45f6641c7e8a5232a93412:pokemongame/src/model/FileManager.java
 	private File directory;
 	private List<X> dataList;
 	private List<X> usedData;

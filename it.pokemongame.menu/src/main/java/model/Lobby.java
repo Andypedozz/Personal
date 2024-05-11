@@ -59,7 +59,11 @@ public class Lobby {
 		return removed;
 	}
 
+<<<<<<< HEAD:it.pokemongame.menu/src/main/java/model/Lobby.java
 	
+=======
+	@Override
+>>>>>>> 61b96edc31c588c32f45f6641c7e8a5232a93412:pokemongame/src/model/LobbyImpl.java
 	public Pokemon getSelected() {
 		// TODO Auto-generated method stub
 		return this.selectedPokemon;

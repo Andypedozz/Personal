@@ -25,6 +25,15 @@ public class Controller implements ViewObserver{
 	private BattleController battleController;
 	private MenuController menuController;
 	private LeaderboardController leadController;
+<<<<<<< HEAD:it.pokemongame.menu/src/main/java/controller/Controller.java
+=======
+
+	// avvio applicazione
+	public static void main(String[] args) {
+		Controller c = new Controller();
+		c.start();
+	}
+>>>>>>> 61b96edc31c588c32f45f6641c7e8a5232a93412:pokemongame/src/controller/Controller.java
 	
 	// controller start
 	public void start() {
