@@ -38,8 +38,8 @@ public class LoginController {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
 			root = loader.load();	
 			MenuController menuController = loader.getController();
-			menuController.displayInfo(username);
 			menuController.setModel(model);
+			menuController.displayInfo();
 			stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);

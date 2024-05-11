@@ -9,10 +9,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Model;
 
 public class MenuController {
+	
+	@FXML
+	Label usernameLabel;
+	@FXML
+	Label nameLabel;
+	@FXML
+	Label genderLabel;
+	@FXML
+	Label ageLabel;
 	
 	private Stage stage;
 	private Scene scene;
@@ -20,8 +30,11 @@ public class MenuController {
 	
 	private Model model;
 	
-	public void displayInfo(String username) {
-		
+	public void displayInfo() {
+		this.usernameLabel.setText("Username: "+model.getAccountManager().getUsedData().get(0).getUsername());
+		this.nameLabel.setText("Name: "+model.getAccountManager().getUsedData().get(0).getUser().getName());
+		this.genderLabel.setText("Gender: "+model.getAccountManager().getUsedData().get(0).getUser().getGender());
+		this.ageLabel.setText("Age: "+model.getAccountManager().getUsedData().get(0).getUser().getAge());
 	}
 	
 	public void actualStatistics(ActionEvent event) throws Exception{
