@@ -9,8 +9,8 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
-import model.Account;
 import interfaces.LeaderboardObserver;
+import model.menu.Account;
 
 public class LeaderboardPanel extends JPanel{
 	private LeaderboardObserver observer;
@@ -24,7 +24,7 @@ public class LeaderboardPanel extends JPanel{
 		this.setLayout(new GridLayout(1,2));
 		leftPanel = new JPanel();
 		rightPanel = new JPanel();
-		records = new LinkedList();
+		records = new LinkedList<>();
 		back = new JButton("Indietro");
 		leftPanel.add(back);
 		this.add(leftPanel);

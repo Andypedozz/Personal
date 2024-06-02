@@ -1,9 +1,5 @@
 package view;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
 import javax.swing.*;
 import interfaces.ViewObserver;
 import model.Pokemon;
@@ -12,7 +8,7 @@ public class MyFrame extends JFrame{
 	private ViewObserver observer;
 	private LoginPanel loginPanel;
 	private TeamPanel teamPanel;
-	private InfoPanel infoPanel;
+	private InfoPanel2 infoPanel;
 	private MainMenuPanel mmPanel;
 	private LeaderboardPanel leadPanel;
 	private SelectMoveView selectMoveView;
@@ -25,9 +21,6 @@ public class MyFrame extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		int screenWidth = (int)screenSize.getWidth();
-		int screenHeight = (int)screenSize.getHeight();
 		this.setVisible(true);
 	}
 	
@@ -110,7 +103,8 @@ public class MyFrame extends JFrame{
 	
 	public void infoScreen(Pokemon pokemon) {
 		this.remove(this.teamPanel);
-		this.infoPanel = new InfoPanel(observer,this.teamPanel.getSelected().getIcon(),pokemon);
+		this.infoPanel = new InfoPanel2(observer);
+		this.infoPanel.loadInfo(pokemon);
 		this.add(infoPanel);
 		this.validate();
 	}

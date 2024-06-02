@@ -5,10 +5,10 @@ import javax.swing.JButton;
 import interfaces.BattleUpdateListener;
 import interfaces.BattleViewObserver;
 import interfaces.View;
-import model.Match;
-import model.Model;
 import model.Move;
 import model.Pokemon;
+import model.battle.Match;
+import model.menu.Model;
 import view.MoveButton;
 import view.PokemonButton;
 

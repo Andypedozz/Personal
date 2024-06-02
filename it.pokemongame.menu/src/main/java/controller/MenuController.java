@@ -1,8 +1,8 @@
 package controller;
 
 import interfaces.MenuObserver;
-import model.Model;
 import interfaces.View;
+import model.menu.Model;
 
 public class MenuController implements MenuObserver{
 	private Model model;

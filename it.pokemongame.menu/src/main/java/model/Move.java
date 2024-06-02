@@ -1,5 +1,7 @@
 package model;
 
+import model.battle.MovesEffects;
+
 public class Move {
 	
 	private final String name;

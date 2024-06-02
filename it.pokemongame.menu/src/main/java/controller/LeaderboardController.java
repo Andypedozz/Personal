@@ -2,9 +2,9 @@ package controller;
 
 import java.util.List;
 import interfaces.LeaderboardObserver;
-import model.Model;
 import interfaces.View;
-import model.Account;
+import model.menu.Account;
+import model.menu.Model;
 
 public class LeaderboardController implements LeaderboardObserver{
 	private Model model;

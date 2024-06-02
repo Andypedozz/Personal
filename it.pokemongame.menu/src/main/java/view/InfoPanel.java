@@ -1,18 +1,13 @@
 package view;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import interfaces.ViewObserver;
 import model.Pokemon;
 
@@ -20,7 +15,6 @@ public class InfoPanel extends JPanel{
 	private ViewObserver observer;
 	
 	// pokemon image
-	private DefaultTableModel model;
 	private Image pokeIcon;
 	private JLabel pokeImgLabel;
 
@@ -31,7 +25,6 @@ public class InfoPanel extends JPanel{
 	private JTextField[] fields, moves;
 	
 	// stats labels
-	private JLabel hp, atk, def, speed;
 	private JButton back;
 	
 	public InfoPanel(ViewObserver observer, Icon pokeIcon, Pokemon pokemon) {
@@ -65,7 +58,7 @@ public class InfoPanel extends JPanel{
 		statsPanel.setLayout(new GridLayout(4,2));
 		statsPanel.setBackground(Color.LIGHT_GRAY);
 		statsPanel.setBorder(border1);
-		//table
+		
 		// table
 		fields = new JTextField[8];
 		fields[0] = new JTextField("HP");

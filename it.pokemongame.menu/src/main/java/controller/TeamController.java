@@ -2,14 +2,13 @@ package controller;
 
 import java.util.LinkedList;
 import java.util.List;
-import model.Model;
+
 import model.Pokemon;
 import interfaces.TeamObserver;
 import interfaces.View;
 import model.Team;
-import model.Team;
-import model.Match;
-import model.Match;
+import model.battle.Match;
+import model.menu.Model;
 
 public class TeamController implements TeamObserver{
 	private Controller father;
@@ -32,8 +31,8 @@ public class TeamController implements TeamObserver{
 		this.view.getFrame().teamMenu();
 		
 		// recupero le immagini d
-		List<String> paths = new LinkedList();
-		List<String> names = new LinkedList();
+		List<String> paths = new LinkedList<>();
+		List<String> names = new LinkedList<>();
 		for(Pokemon p : this.model.getLobby().getPokedex().getList()) {
 			paths.add(p.getIconString());
 			names.add(p.getName());

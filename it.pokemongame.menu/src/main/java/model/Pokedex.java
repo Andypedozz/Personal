@@ -1,10 +1,8 @@
 package model;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import model.Pokemon;
-import model.Stats;
+import model.battle.MovesEffects;
 
 public class Pokedex {
 	

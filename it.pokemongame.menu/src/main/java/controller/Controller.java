@@ -1,17 +1,14 @@
 package controller;
 
-import java.lang.reflect.Field;
-
 import interfaces.BattleViewObserver;
 import interfaces.LeaderboardObserver;
 import interfaces.LoginObserver;
-import model.Match;
+import model.battle.Match;
+import model.menu.Model;
 import interfaces.MenuObserver;
-import model.Model;
 import interfaces.TeamObserver;
 import interfaces.View;
 import interfaces.ViewObserver;
-import model.Model;
 import view.ViewImpl;
 
 public class Controller implements ViewObserver{
@@ -28,7 +25,9 @@ public class Controller implements ViewObserver{
 	
 	// controller start
 	public void start() {
-		this.model = new Model("accountdata");
+		this.model = new Model();
+		this.model.initAccountManager("accountdata");
+		this.model.initLoginManager();
 		this.view = new ViewImpl(this);
 		this.initLogin();
 	}
