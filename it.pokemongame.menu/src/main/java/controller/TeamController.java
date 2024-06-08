@@ -30,26 +30,24 @@ public class TeamController implements TeamObserver{
 		}
 		this.view.getFrame().teamMenu();
 		
-		// recupero le immagini d
+		// recupero le immagini dal pokedex
 		List<String> paths = new LinkedList<>();
 		List<String> names = new LinkedList<>();
-		for(Pokemon p : this.model.getLobby().getPokedex().getList()) {
-			paths.add(p.getIconString());
-			names.add(p.getName());
-		}
+		this.model.getLobby().getPokedex().getList().stream().forEach(e -> {
+			paths.add(e.getIconString());
+			names.add(e.getName());
+		});
 		this.view.getFrame().getTeamPanel().loadButtons(names,paths);
 		
 	}
 	
 	@Override
 	public void selectPokemon(String name) {
-		// TODO Auto-generated method stub
 		this.model.getLobby().selectPokemon(name);
 	}
 
 	@Override
 	public void addPokemon(int select) {
-		// TODO Auto-generated method stub
 		int added = this.model.getLobby().addPokemon(select);
 		if(added >= 0) {
 			this.view.getFrame().getTeamPanel().addPokemon(select);
@@ -69,14 +67,12 @@ public class TeamController implements TeamObserver{
 
 	@Override
 	public void deselect() {
-		// TODO Auto-generated method stub
 		this.model.getLobby().deselect();
 		this.view.getFrame().getTeamPanel().resetSlots();
 	}
 	
 	@Override
 	public void infoScreen() {
-		// TODO Auto-generated method stub
 		if(this.model.getLobby().getSelected() != null) {
 			Pokemon pokemon = this.model.getLobby().getSelected();
 			this.view.getFrame().infoScreen(pokemon);
@@ -88,7 +84,6 @@ public class TeamController implements TeamObserver{
 
 	@Override
 	public void removePokemon(int select) {
-		// TODO Auto-generated method stub
 		int index = this.model.getLobby().removePokemon(select);
 		if(index > -1) {
 			this.view.getFrame().getTeamPanel().removePokemon(select,index);
@@ -99,14 +94,12 @@ public class TeamController implements TeamObserver{
 
 	@Override
 	public void backFromTeam() {
-		// TODO Auto-generated method stub
 		this.model.exitLobby();
 		this.father.initMainMenu();
 	}
 
 	@Override
 	public void selectFromTeam(int select, int index) {
-		// TODO Auto-generated method stub
 		boolean selected = this.model.getLobby().selectFromTeam(select, index);
 		if(selected)
 			this.view.getFrame().getTeamPanel().selectFromTeam(select, index);
@@ -128,7 +121,6 @@ public class TeamController implements TeamObserver{
 
 	@Override
 	public int getPokedexSize() {
-		// TODO Auto-generated method stub
 		return this.model.getLobby().getPokedex().getList().size();
 	}
 }

@@ -19,7 +19,6 @@ public class LeaderboardController implements LeaderboardObserver{
 	
 	@Override
 	public void initLeaderboard() {
-		// TODO Auto-generated method stub
 		this.view.getFrame().leaderboard();
 		List<Account> accounts = List.copyOf(this.model.getAccountManager().getDataList());
 		this.view.getFrame().getLeaderboardPanel().loadRecords(accounts);
@@ -27,7 +26,6 @@ public class LeaderboardController implements LeaderboardObserver{
 
 	@Override
 	public void back() {
-		// TODO Auto-generated method stub
 		this.father.initMainMenu();
 	}
 }

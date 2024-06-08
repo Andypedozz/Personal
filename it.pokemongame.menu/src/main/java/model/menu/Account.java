@@ -1,7 +1,5 @@
 package model.menu;
 
-import model.menu.User;
-
 public class Account {
 	private String username;
 	private String password;
@@ -58,13 +56,11 @@ public class Account {
 
 	
 	public boolean getState() {
-		// TODO Auto-generated method stub
 		return this.isPlaying;
 	}
 
 	
 	public void setState(boolean state) {
-		// TODO Auto-generated method stub
 		this.isPlaying = state;
 	}
 }

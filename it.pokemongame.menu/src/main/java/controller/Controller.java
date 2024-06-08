@@ -26,22 +26,20 @@ public class Controller implements ViewObserver{
 	// controller start
 	public void start() {
 		this.model = new Model();
-		this.model.initAccountManager("accountdata");
+		this.model.initAccountManager(this.getClass().getResource("/accountdata").getPath());
 		this.model.initLoginManager();
 		this.view = new ViewImpl(this);
-		this.initLogin();
+		this.view.getFrame().firstMenu();
 	}
 	
 	@Override
 	public void initLogin() {
-		// TODO Auto-generated method stub
 		this.loginController = new LoginController(model,view,this);
 		this.loginController.initLogin();
 	}
 
 	@Override
 	public void initTeam() {
-		// TODO Auto-generated method stub
 		this.teamController = new TeamController(model,view,this);
 		this.teamController.initTeam();
 	}
@@ -54,52 +52,49 @@ public class Controller implements ViewObserver{
 
 	@Override
 	public void disconnect(int select) {
-		// TODO Auto-generated method stub
 		this.loginController.disconnect(select);
 	}
 
 	@Override
 	public LoginObserver getLoginObserver() {
-		// TODO Auto-generated method stub
 		return this.loginController;
 	}
 
 	@Override
 	public TeamObserver getTeamObserver() {
-		// TODO Auto-generated method stub
 		return this.teamController;
 	}
 
 	@Override
 	public BattleViewObserver getBattleObserver() {
-		// TODO Auto-generated method stub
 		return this.battleController;
 	}
 
 	@Override
 	public void initLeaderboard() {
-		// TODO Auto-generated method stub
 		this.leadController = new LeaderboardController(model,view,this);
 		this.leadController.initLeaderboard();
 	}
 
 	@Override
 	public void initMainMenu() {
-		// TODO Auto-generated method stub
 		this.menuController = new MenuController(model,view,this);
 		this.menuController.initMenu();
 	}
 	
 	@Override
 	public MenuObserver getMenuObserver() {
-		// TODO Auto-generated method stub
 		return this.menuController;
 	}
 
 	@Override
 	public LeaderboardObserver getLeadObserver() {
-		// TODO Auto-generated method stub
 		return this.leadController;
+	}
+
+	@Override
+	public void quickPlay() {
+		this.initTeam();
 	}
 
 }

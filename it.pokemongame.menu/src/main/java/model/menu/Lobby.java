@@ -5,21 +5,18 @@ import java.util.List;
 
 import model.Pokedex;
 import model.Pokemon;
-import model.menu.Account;
 
 public class Lobby {
 	private static Lobby INSTANCE = null;
 	private List<Pokemon> teams[];
 	private Pokemon selectedPokemon;
 	private Pokedex pokedex;
-	private boolean ready[];
 	
 	private Lobby() {
 		this.pokedex = new Pokedex();
 		this.teams = new LinkedList[2];
-		this.teams[0] = new LinkedList();
-		this.teams[1] = new LinkedList();
-		this.ready = new boolean[2];
+		this.teams[0] = new LinkedList<>();
+		this.teams[1] = new LinkedList<>();
 	}
 	
 	public static Lobby getInstance() {
@@ -29,7 +26,6 @@ public class Lobby {
 	}
 	
 	public int addPokemon(int select) {
-		// TODO Auto-generated method stub
 		int added;
 		if(this.teams[select].size() < 3)
 			if(this.selectedPokemon != null && !this.teams[select].contains(this.selectedPokemon)) {
@@ -54,7 +50,6 @@ public class Lobby {
 
 	
 	public int removePokemon(int select) {
-		// TODO Auto-generated method stub
 		int removed;
 		if(this.teams[select].size() >= 1) {
 			int index = this.teams[select].size() - 1;
@@ -69,13 +64,11 @@ public class Lobby {
 
 	
 	public Pokemon getSelected() {
-		// TODO Auto-generated method stub
 		return this.selectedPokemon;
 	}
 
 	
 	public void deselect() {
-		// TODO Auto-generated method stub
 		if(this.selectedPokemon != null) {
 			this.selectedPokemon = null;
 			System.out.println("Deselezionato!");
@@ -84,26 +77,22 @@ public class Lobby {
 
 	
 	public void selectPokemon(String name) {
-		// TODO Auto-generated method stub
 		this.selectedPokemon = this.pokedex.getPokemon(name);
 		System.out.println("Selezionato "+this.selectedPokemon.getName());
 	}
 
 	
 	public void initPokedex() {
-		// TODO Auto-generated method stub
 		this.pokedex = new Pokedex();
 	}
 
 	
 	public Pokedex getPokedex() {
-		// TODO Auto-generated method stub
 		return this.pokedex;
 	}
 
 	
 	public boolean selectFromTeam(int select, int index) {
-		// TODO Auto-generated method stub
 		boolean selected = false;
 		if(this.teams[select].size() > index) {
 			this.selectedPokemon = this.teams[select].get(index);
@@ -116,7 +105,6 @@ public class Lobby {
 
 	
 	public boolean play() {
-		// TODO Auto-generated method stub
 		boolean ready = false;
 		if(this.teams[0].size() == 3 && this.teams[1].size() == 3)
 			ready = true;
@@ -125,7 +113,6 @@ public class Lobby {
 
 	
 	public List<Pokemon> getTeam(int select) {
-		// TODO Auto-generated method stub
 		return this.teams[select];
 	}
 }

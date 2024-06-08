@@ -1,48 +1,63 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ */
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.ScrollPaneLayout;
+import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
 import interfaces.LeaderboardObserver;
 import model.menu.Account;
 
-public class LeaderboardPanel extends JPanel{
-	private LeaderboardObserver observer;
-	private JScrollPane scrollPane;
-	private JPanel leftPanel, rightPanel;
-	private List<JTextField> records;
-	private JButton back;
-	
-	public LeaderboardPanel(LeaderboardObserver observer) {
-		this.observer = observer;
-		this.setLayout(new GridLayout(1,2));
-		leftPanel = new JPanel();
-		rightPanel = new JPanel();
-		records = new LinkedList<>();
-		back = new JButton("Indietro");
-		leftPanel.add(back);
-		this.add(leftPanel);
-	}
-	
-	public void initListeners() {
-		this.back.addActionListener(new ActionListener() {
+public class LeaderboardPanel extends JPanel {
+    private LeaderboardObserver observer;
+    private JScrollPane rankingPanel;
+    private JPanel centerPanel;
+    private List<JTextField> records;
+    private JLabel title;
+    private JButton back;
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				observer.back();
-			}
-		});
-	}
-	
-	public void loadRecords(List<Account> accounts) {
-		rightPanel.setLayout(new GridLayout(accounts.size(),4));
+    public LeaderboardPanel(LeaderboardObserver observer) {
+        this.observer = observer;
+        initComponents();
+    }
+
+    private void initComponents() {
+        records = new LinkedList<>();
+        title = new JLabel();
+        rankingPanel = new JScrollPane();
+        back = new JButton("Back");
+        centerPanel = new JPanel();
+        setLayout(new BorderLayout());
+
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        title.setText("Leaderboard");
+        add(title, BorderLayout.NORTH);
+        add(back, BorderLayout.SOUTH);
+    }
+
+    public void initListeners() {
+        back.addActionListener(e -> {
+            observer.back();
+        });
+    }
+
+    public void loadRecords(List<Account> accounts) {
+		centerPanel.setLayout(new GridLayout(accounts.size(),4));
 		for(Account a : accounts) {
 			records.add(new JTextField(a.getUsername()));
 			records.add(new JTextField(a.getUser().getMatches()));
@@ -52,12 +67,12 @@ public class LeaderboardPanel extends JPanel{
 		for(JTextField jt : this.records) {	
 			jt.setEditable(false);
 			jt.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-			rightPanel.add(jt);
+			centerPanel.add(jt);
 		}
-		this.scrollPane = new JScrollPane(rightPanel);
-		scrollPane.setLayout(new ScrollPaneLayout());
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setWheelScrollingEnabled(true);
-		this.add(scrollPane);
-	}
+		this.rankingPanel = new JScrollPane(centerPanel);
+		rankingPanel.setLayout(new ScrollPaneLayout());
+		rankingPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		rankingPanel.setWheelScrollingEnabled(true);
+		this.add(rankingPanel);
+	} 
 }

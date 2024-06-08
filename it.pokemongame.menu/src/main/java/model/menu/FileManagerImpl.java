@@ -15,9 +15,9 @@ public abstract class FileManagerImpl<X> implements FileManager<X> {
 	private List<File> filesUsed;
 	
 	public FileManagerImpl() {
-		this.usedData = new LinkedList();
-		this.dataList = new LinkedList();
-		this.filesUsed = new LinkedList();
+		this.usedData = new LinkedList<>();
+		this.dataList = new LinkedList<>();
+		this.filesUsed = new LinkedList<>();
 	}
 	
 	public void openFileDirectory(String filepath) throws FileNotFoundException{

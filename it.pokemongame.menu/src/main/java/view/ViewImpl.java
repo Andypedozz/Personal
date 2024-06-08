@@ -14,7 +14,6 @@ public class ViewImpl implements View{
 	
 	@Override
 	public MyFrame getFrame() {
-		// TODO Auto-generated method stub
 		return this.frame;
 	}
 	

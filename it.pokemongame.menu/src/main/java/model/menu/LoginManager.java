@@ -1,16 +1,11 @@
 package model.menu;
 
 import java.io.FileNotFoundException;
-import java.util.HashMap;
-
-import interfaces.FileManager;
-import model.menu.Account;
-import model.menu.User;
 
 public class LoginManager {
 	private static LoginManager INSTANCE = null;
-	private AccountManager fileManager;
-	private boolean logged[];
+	private final AccountManager fileManager;
+	private final boolean logged[];
 	
 	private LoginManager() {
 		this.fileManager = AccountManager.getInstance();
@@ -58,12 +53,11 @@ public class LoginManager {
 	
 	// metodo per registrarsi
 	public void register(String username, String password, String name, String gender) throws FileNotFoundException {
-		// TODO Auto-generated method stub
 		if(this.fileManager.getOpenedDirectory() == null || !this.fileManager.getOpenedDirectory().exists())
 			throw new FileNotFoundException("Directory non impostata!");
 		int newId;
 		User user = new User(name,gender);
-		if(this.fileManager.getDataList().size() > 0) {
+		if(!this.fileManager.getDataList().isEmpty()) {
 			int lastId = this.fileManager.getDataList().get(this.fileManager.getDataList().size() - 1).getId();
 			System.out.println("Last id: "+lastId);
 			newId = lastId + 1;
@@ -73,7 +67,8 @@ public class LoginManager {
 		if(!this.fileManager.getDataList().contains(toAdd)) {
 			this.fileManager.getDataList().add(toAdd);
 			System.out.println("Nuovo account registrato correttamente");
-			this.fileManager.writeNewFile(toAdd);			this.fileManager.readFromFile();
+			this.fileManager.writeNewFile(toAdd);
+			this.fileManager.readFromFile();
 		}else
 			System.out.println("Account già esistente!");
 	}
@@ -86,8 +81,15 @@ public class LoginManager {
 	}
 
 	public boolean ready() {
-		// TODO Auto-generated method stub
 		return this.logged[0] && this.logged[1];
+	}
+	
+	public void showAccountsState() {
+		System.out.println("**********************************");
+		for(Account a : this.fileManager.getDataList()) {
+			System.out.println("Account name: "+a.getUsername()+"     Stato: "+(a.getState()? "Loggato":"Sloggato"));
+		}
+		System.out.println("**********************************");
 	}
 
 }

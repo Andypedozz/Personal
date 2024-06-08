@@ -4,12 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-
-import model.menu.Account;
-import model.menu.User;
 
 public class AccountManager extends FileManagerImpl<Account>{
 	private static AccountManager INSTANCE = null;
@@ -27,7 +23,6 @@ public class AccountManager extends FileManagerImpl<Account>{
 	
 	@Override
 	public void writeNewFile(Account data) {
-		// TODO Auto-generated method stub
 		File credFile = this.getOpenedDirectory();
 		String filename = String.valueOf(data.getId());
 		File toWrite = new File(credFile,filename);
@@ -42,7 +37,6 @@ public class AccountManager extends FileManagerImpl<Account>{
 					data.getUser().getLosses());
 			myWriter.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("Scritto nuovo file");
@@ -50,7 +44,6 @@ public class AccountManager extends FileManagerImpl<Account>{
 
 	@Override
 	public void readFromFile() {
-		// TODO Auto-generated method stub
 		List<File> fileList = null;
 		boolean read = true;
 		try {
@@ -96,7 +89,6 @@ public class AccountManager extends FileManagerImpl<Account>{
 
 	@Override
 	public void updateFile(Account data) {
-		// TODO Auto-generated method stub
 		for(File f : this.getAllFiles()) {
 			if(String.valueOf(data.getId()).equals(f.getName())) {
 				f.delete();
@@ -110,6 +102,7 @@ public class AccountManager extends FileManagerImpl<Account>{
 							data.getUser().getMatches()+"\n"+
 							data.getUser().getWins()+"\n"+
 							data.getUser().getLosses());
+					myWriter.close();
 				}catch(IOException e) {
 					e.printStackTrace();
 				}

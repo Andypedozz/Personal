@@ -6,7 +6,7 @@ import interfaces.LoginObserver;
 
 public class LoginPanel extends JPanel{
 	private LoginObserver observer;
-	private LoginForm loginForms[];
+	private LoginForm2 loginForms[];
 	
 	public LoginPanel(LoginObserver observer) {
 		// init settings
@@ -14,9 +14,9 @@ public class LoginPanel extends JPanel{
 		this.setSize(800,600);
 		this.setLayout(new GridLayout(1,2));
 		
-		this.loginForms = new LoginForm[2];
-		this.loginForms[0] = new LoginForm(0,observer);
-		this.loginForms[1] = new LoginForm(1,observer);
+		this.loginForms = new LoginForm2[2];
+		this.loginForms[0] = new LoginForm2(0,observer);
+		this.loginForms[1] = new LoginForm2(1,observer);
 		this.add(loginForms[0]);
 		this.add(loginForms[1]);
 		this.setVisible(true);

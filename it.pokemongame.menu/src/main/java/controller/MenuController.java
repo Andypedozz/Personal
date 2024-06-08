@@ -17,25 +17,21 @@ public class MenuController implements MenuObserver{
 	
 	@Override
 	public void initMenu() {
-		// TODO Auto-generated method stub
 		this.view.getFrame().mainMenu();
 	}
 	
 	@Override
 	public void leaderboardScreen() {
-		// TODO Auto-generated method stub
 		this.father.initLeaderboard();
 	}
 
 	@Override
 	public void teamScreen() {
-		// TODO Auto-generated method stub
 		this.father.initTeam();
 	}
 
 	@Override
 	public void back() {
-		// TODO Auto-generated method stub
 		this.model.getLogger().disconnect(1);
 		this.model.getLogger().disconnect(0);
 		this.father.initLogin();

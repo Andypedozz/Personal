@@ -6,10 +6,11 @@ import model.Pokemon;
 
 public class MyFrame extends JFrame{
 	private ViewObserver observer;
+	private FirstMenu firstMenu;
 	private LoginPanel loginPanel;
 	private TeamPanel teamPanel;
-	private InfoPanel2 infoPanel;
-	private MainMenuPanel mmPanel;
+	private InfoPanel infoPanel;
+	private MainMenu mmPanel;
 	private LeaderboardPanel leadPanel;
 	private SelectMoveView selectMoveView;
 	private SwitchView switchView;
@@ -24,21 +25,27 @@ public class MyFrame extends JFrame{
 		this.setVisible(true);
 	}
 	
+	public void firstMenu() {
+		this.firstMenu = new FirstMenu(observer);
+		this.add(firstMenu);
+		this.revalidate();
+	}
+
 	// metodo per inserire il panel di login
 	public void loginMenu() {
+		if(this.firstMenu != null) {
+			this.remove(firstMenu);
+			this.firstMenu = null;
+		}
 		if(this.mmPanel != null) {
 			this.remove(mmPanel);
 			this.mmPanel = null;
 		}
-		if(this.teamPanel != null) {
-			this.remove(teamPanel);
-			this.teamPanel = null;
-		}
 		this.loginPanel = new LoginPanel(observer.getLoginObserver());
 		this.loginPanel.initListeners();
 		this.add(loginPanel);
-		this.setSize(800,600);
-		this.setResizable(false);
+//		this.setSize(800,600);
+		this.setResizable(true);
 		this.revalidate();
 	}
 	
@@ -55,10 +62,9 @@ public class MyFrame extends JFrame{
 			this.remove(leadPanel);
 			this.leadPanel = null;
 		}
-		this.mmPanel = new MainMenuPanel(this.observer.getMenuObserver());
+		this.mmPanel = new MainMenu(this.observer.getMenuObserver());
 		this.mmPanel.initListeners();
 		this.add(mmPanel);
-		this.setSize(801,600);
 		this.revalidate();
 	}
 	
@@ -74,12 +80,16 @@ public class MyFrame extends JFrame{
 		this.leadPanel = new LeaderboardPanel(this.observer.getLeadObserver());
 		this.leadPanel.initListeners();
 		this.add(leadPanel);
-		this.setSize(802,601);
+//		this.setSize(802,601);
 		this.revalidate();
 	}
 	
 	// metodo per inserire il panel di scelta team
 	public void teamMenu() {
+		if(this.firstMenu != null) {
+			this.remove(firstMenu);
+			this.firstMenu = null;
+		}
 		if(this.loginPanel != null) {
 			this.remove(loginPanel);
 			this.loginPanel = null;
@@ -103,7 +113,7 @@ public class MyFrame extends JFrame{
 	
 	public void infoScreen(Pokemon pokemon) {
 		this.remove(this.teamPanel);
-		this.infoPanel = new InfoPanel2(observer);
+		this.infoPanel = new InfoPanel(observer);
 		this.infoPanel.loadInfo(pokemon);
 		this.add(infoPanel);
 		this.validate();

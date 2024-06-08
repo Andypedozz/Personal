@@ -15,19 +15,16 @@ public class Pair<T1,T2> {
 
 
 	public T2 getSecond() {
-		// TODO Auto-generated method stub
 		return this.second;
 	}
 
 
 	public void setFirst(T1 x) {
-		// TODO Auto-generated method stub
 		this.first = x;
 	}
 
 
 	public void setSecond(T2 x) {
-		// TODO Auto-generated method stub
 		this.second = x;
 	}
 	

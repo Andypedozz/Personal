@@ -8,6 +8,7 @@ public interface ViewObserver {
 	void initLeaderboard();
 	void initMainMenu();
 	void initBattle(Match match);
+	void quickPlay();
 	void disconnect(int select);
 	LoginObserver getLoginObserver();
 	TeamObserver getTeamObserver();

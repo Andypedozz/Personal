@@ -24,12 +24,10 @@ public class LoginController implements LoginObserver{
 	
 	@Override
 	public void register(String username, String password, String name, String gender) {
-		// TODO Auto-generated method stub
 		if(!username.isBlank() && !password.isBlank() && !name.isBlank() && !gender.isBlank())
 			try {
 				this.model.getLogger().register(username, password, name, gender);
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				System.out.println(e.getMessage());
 			}
 		else
@@ -38,7 +36,6 @@ public class LoginController implements LoginObserver{
 
 	@Override
 	public void login(int select, String username, String password) {
-		// TODO Auto-generated method stub
 		int logged = this.model.getLogger().login(select, username, password);
 		switch(logged) {
 		case 0:
@@ -53,11 +50,12 @@ public class LoginController implements LoginObserver{
 		case 2:
 			this.view.getFrame().getLoginPanel().accountNotFound();
 		}
+		this.model.getLogger().showAccountsState();
 	}
 
 	@Override
 	public void disconnect(int select) {
-		// TODO Auto-generated method stub
 		this.model.getLogger().disconnect(select);
+		this.model.getLogger().showAccountsState();
 	}
 }

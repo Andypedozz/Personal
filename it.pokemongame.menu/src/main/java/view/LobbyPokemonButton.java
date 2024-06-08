@@ -2,15 +2,17 @@ package view;
 
 import javax.swing.JButton;
 
-public class LobbyPokemonButton extends JButton{
+public class LobbyPokemonButton extends JButton {
 	private String pokemonName;
 	private int index;
 	
 	public LobbyPokemonButton(int index) {
+		super();
 		this.index = index;
 	}
 	
 	public LobbyPokemonButton(String pokemonName, int index) {
+		super();
 		this.index = index;
 		this.pokemonName = pokemonName;
 	}

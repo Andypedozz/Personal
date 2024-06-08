@@ -1,7 +1,6 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,6 +22,8 @@ public class TeamPanel extends JPanel{
 		this.observer = observer;
 		this.setSize(800,600);
 		this.setLayout(new GridLayout(1,3));
+		Color startColor = Color.DARK_GRAY;
+		Color endColor = Color.WHITE;
 		
 		// init components
 		// buttons panel
@@ -33,7 +34,7 @@ public class TeamPanel extends JPanel{
 		removePokeLeft = new JButton("Rimuovi");
 		removePokeRight = new JButton("Rimuovi");
 		deselect = new JButton("Deseleziona");
-		play = new JButton("Gioca");	
+		play = new JButton("Gioca");
 		
 		// panels
 		leftPanel = new JPanel();
@@ -205,4 +206,5 @@ public class TeamPanel extends JPanel{
 		JFrame frame = new JFrame();
 		JOptionPane.showMessageDialog(frame, "I due team non sono pronti!");
 	}
+	
 }

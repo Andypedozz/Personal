@@ -21,7 +21,6 @@ public class Model {
 	}
 	
 	public AccountManager getAccountManager() {
-		// TODO Auto-generated method stub
 		return this.fileManager;
 			
 	}	
@@ -32,19 +31,16 @@ public class Model {
 	}
 	
 	public LoginManager getLogger() {
-		// TODO Auto-generated method stub
 		return this.logger;	
 	}
 
 	
 	public Lobby getLobby() {
-		// TODO Auto-generated method stub
 		return this.lobby;
 	}
 
 	
 	public void initLobby() {
-		// TODO Auto-generated method stub
 		this.lobby = Lobby.getInstance();
 	}
 	
@@ -61,7 +57,6 @@ public class Model {
 
 	
 	public void exitLobby() {
-		// TODO Auto-generated method stub
 		this.lobby = null;
 	}
 }
