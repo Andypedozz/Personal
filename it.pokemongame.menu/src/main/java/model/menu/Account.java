@@ -1,66 +1,62 @@
 package model.menu;
 
 public class Account {
-	private String username;
-	private String password;
-	private User user;
-	private int id;
-	private boolean isPlaying;
-	
-	public Account(String username, String password) {
-		this.username = username;
-		this.password = password;
-		this.isPlaying = false;
-	}
-	
-	public Account(String username, String password, int id) {
-		this.username = username;
-		this.password = password;
-		this.id = id;
-		this.isPlaying = false;
-	}
-	
-	public Account(String username, String password, User user, int id) {
-		this.username = username;
-		this.password = password;
-		this.user = user;
-		this.id = id;
-		this.isPlaying = false;
-	}
+    private String username;
+    private String password;
+    private int id;
+    private int matches;
+    private int wins;
+    private int losses;
+    private boolean logged;
 
-	public String getUsername() {
-		return username;
-	}
+    public Account(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.matches = 0;
+        this.wins = 0;
+        this.losses = 0;
+        this.logged = false;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public Account(String username, String password, int id, int matches, int wins, int losses) {
+        this.username = username;
+        this.password = password;
+        this.id = id;
+        this.matches = matches;
+        this.wins = wins;
+        this.losses = losses;
+        this.logged = false;
+    }
 
-	public User getUser() {
-		return user;
-	}
-	
-	public int getId() {
-		return this.id;
-	}
-	
-	public String toString() {
-		return "Account ID: "+this.id+"\n"+
-			   "User Data:\n"+user.toString();
-	}
-	
-	public boolean equals(Object o) {
-		return this.username.equals(((Account)o).getUsername()) &&
-			   this.password.equals(((Account)o).getPassword());
-	}
+    public String getUsername() {
+        return this.username;
+    }
 
-	
-	public boolean getState() {
-		return this.isPlaying;
-	}
+    public String getPassword() {
+        return this.password;
+    }
 
-	
-	public void setState(boolean state) {
-		this.isPlaying = state;
-	}
+    public int getId() {
+        return this.id;
+    }
+
+    public int getMatches() {
+        return this.matches;
+    }
+
+    public int getWins() {
+        return this.wins;
+    }
+
+    public int getLosses() {
+        return this.losses;
+    }
+
+    public boolean isLogged() {
+        return this.logged;
+    }
+
+    public void setLogged(boolean logged) {
+        this.logged = logged;
+    }
 }

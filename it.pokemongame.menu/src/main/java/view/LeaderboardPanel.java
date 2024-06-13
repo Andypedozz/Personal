@@ -60,9 +60,9 @@ public class LeaderboardPanel extends JPanel {
 		centerPanel.setLayout(new GridLayout(accounts.size(),4));
 		for(Account a : accounts) {
 			records.add(new JTextField(a.getUsername()));
-			records.add(new JTextField(a.getUser().getMatches()));
-			records.add(new JTextField(a.getUser().getWins()));
-			records.add(new JTextField(a.getUser().getLosses()));
+			records.add(new JTextField(a.getMatches()));
+			records.add(new JTextField(a.getWins()));
+			records.add(new JTextField(a.getLosses()));
 		}
 		for(JTextField jt : this.records) {	
 			jt.setEditable(false);

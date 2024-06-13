@@ -20,7 +20,7 @@ public class LeaderboardController implements LeaderboardObserver{
 	@Override
 	public void initLeaderboard() {
 		this.view.getFrame().leaderboard();
-		List<Account> accounts = List.copyOf(this.model.getAccountManager().getDataList());
+		List<Account> accounts = List.copyOf(this.model.getAccountManager().getDataMap().values());
 		this.view.getFrame().getLeaderboardPanel().loadRecords(accounts);
 	}
 

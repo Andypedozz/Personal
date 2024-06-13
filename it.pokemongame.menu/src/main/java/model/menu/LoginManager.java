@@ -1,95 +1,106 @@
 package model.menu;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import model.Pair;
+
+import java.util.Set;
 
 public class LoginManager {
-	private static LoginManager INSTANCE = null;
-	private final AccountManager fileManager;
-	private final boolean logged[];
-	
-	private LoginManager() {
-		this.fileManager = AccountManager.getInstance();
-		this.logged = new boolean[2];
-	}
-	
-	public static LoginManager getInstance() {
-		if(INSTANCE == null)
-			INSTANCE = new LoginManager();
-		return INSTANCE;
-	}
-	
-	// metodo per loggare
-	public int login(int select, String username, String password) {
-		int result;
-		boolean found = false;
-		
-		// creo l'account con solo le credenziali
-		Account toLogin = new Account(username,password);
-		
-		if(this.fileManager.getDataList().contains(toLogin)) {
-			while(!found) {
-				for(Account a : this.fileManager.getDataList())
-					if(a.equals(toLogin)) {
-						found = true;
-						toLogin = a;
-					}
-			}
-			if(!toLogin.getState()) {
-				toLogin.setState(true);
-				this.fileManager.getUsedData().add(toLogin);
-				System.out.println("Profilo "+(select+1)+" loggato come "+toLogin.getUsername());
-				this.logged[select] = true;
-				result = 0;
-			}else {
-				System.out.println("Account già utilizzato!");
-				result = 1;
-			}
-		}else {
-			System.out.println("Errore: Account non trovato");
-			result = 2;
+    private static LoginManager INSTANCE;
+    private FileManager fileManager;
+    private Account accounts[];
+    private boolean logged[];
+
+    private LoginManager() {
+        this.fileManager = FileManager.getInstance();
+        this.accounts = new Account[2];
+        this.logged = new boolean[2];
+    }
+
+    public static LoginManager getInstance() {
+        if(INSTANCE == null)
+            INSTANCE = new LoginManager();
+        return INSTANCE;
+    }
+
+    // casistiche di successo: Credenziali presenti, account non loggato e slot libero
+    // casistiche fallimento: Credenziali non presenti o account già utilizzato o slot loggato
+    public int login(String username, String password, int select) {
+        int exit = 0;
+        Pair<String,String> credentials = this.fileManager.getKey(username, password);
+        
+        Account toLogin = this.fileManager.getDataMap().get(credentials);
+        if(toLogin != null && this.accounts[select] == null && !toLogin.isLogged()) {
+            this.accounts[select] = toLogin;
+            toLogin.setLogged(true);
+            this.logged[select] = true;
+            exit = 0;
+            System.out.println("Profilo "+select+" loggato come "+toLogin.getUsername());
+        }else{
+            if(!this.fileManager.getDataMap().containsKey(credentials)) {
+                exit = 2;
+                System.out.println("Account non trovato!");
+            }else if(this.accounts[select] != null) {
+                exit = 3;
+                System.out.println("Account selezionato non è null");
+            }else if(toLogin.isLogged()) {
+                exit = 1;
+                System.out.println("Account già in uso");
+            }
+        }
+        return exit;
+    }
+
+    public boolean register(String username, String password) throws FileNotFoundException {
+        // casistiche di successo: username non è già presente
+        boolean result = true;
+        Set<Entry<Pair<String,String>,Account>> set = this.fileManager.getDataMap().entrySet();
+        Iterator iterator = set.iterator();
+
+        // controllo se è già presente un account con l'username inserito
+        for(Entry<Pair<String,String>,Account> entry : set) {
+            if(entry.getKey().getFirst().equals(username))
+                result = false;
+        }
+
+        // se non c'è
+        if(result) {
+            Account toRegister = new Account(username, password);
+            Pair<String,String> creds = new Pair<>(username,password);
+            this.fileManager.getDataMap().put(creds, toRegister);
+            this.fileManager.writeNewFile(toRegister);
+            System.out.println("Registrato con successo");
+        }else{
+            System.out.println("Username già utilizzato!");
+        }
+        return result;
+    }
+
+    public boolean disconnect(int select) {
+        boolean result = true;
+
+        if(this.accounts[select] != null) {
+			this.accounts[select].setLogged(false);
+			System.out.println("Profilo "+select+" ("+this.accounts[select].getUsername()+") disconnesso");
+			this.accounts[select] = null;
+			this.logged[select] = false;
+		}else{
+			System.out.println("Profilo "+select+" non loggato!");
 		}
-		return result;
-	}
-	
-	// metodo per registrarsi
-	public void register(String username, String password, String name, String gender) throws FileNotFoundException {
-		if(this.fileManager.getOpenedDirectory() == null || !this.fileManager.getOpenedDirectory().exists())
-			throw new FileNotFoundException("Directory non impostata!");
-		int newId;
-		User user = new User(name,gender);
-		if(!this.fileManager.getDataList().isEmpty()) {
-			int lastId = this.fileManager.getDataList().get(this.fileManager.getDataList().size() - 1).getId();
-			System.out.println("Last id: "+lastId);
-			newId = lastId + 1;
-		}else
-			newId = 0;
-		Account toAdd = new Account(username,password,user,newId);
-		if(!this.fileManager.getDataList().contains(toAdd)) {
-			this.fileManager.getDataList().add(toAdd);
-			System.out.println("Nuovo account registrato correttamente");
-			this.fileManager.writeNewFile(toAdd);
-			this.fileManager.readFromFile();
-		}else
-			System.out.println("Account già esistente!");
-	}
+        return result;
+    }
 
-	public void disconnect(int select) {
-		this.fileManager.getDataList().get(select).setState(false);
-		this.fileManager.getUsedData().remove(select);
-		System.out.println("Account "+(select+1)+" disconnesso!");
-		this.logged[select] = false;
-	}
+    public FileManager getFileManager() {
+        return this.fileManager;
+    }
 
-	public boolean ready() {
-		return this.logged[0] && this.logged[1];
-	}
-	
-	public void showAccountsState() {
-		System.out.println("**********************************");
-		for(Account a : this.fileManager.getDataList()) {
-			System.out.println("Account name: "+a.getUsername()+"     Stato: "+(a.getState()? "Loggato":"Sloggato"));
-		}
-		System.out.println("**********************************");
-	}
-
+    public boolean ready() {
+        return this.logged[0] && this.logged[1];
+    }
 }

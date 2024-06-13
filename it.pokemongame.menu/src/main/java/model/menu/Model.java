@@ -5,13 +5,13 @@ import java.io.FileNotFoundException;
 import model.battle.Match;
 
 public class Model {
-	private AccountManager fileManager;
+	private FileManager fileManager;
 	private LoginManager logger;
 	private Lobby lobby;
 	private Match match;
 	
 	public void initAccountManager(String filepath) {
-		this.fileManager = AccountManager.getInstance();
+		this.fileManager = FileManager.getInstance();
 		try {
 			this.fileManager.openFileDirectory(filepath);
 			this.fileManager.readFromFile();
@@ -20,7 +20,7 @@ public class Model {
 		}
 	}
 	
-	public AccountManager getAccountManager() {
+	public FileManager getAccountManager() {
 		return this.fileManager;
 			
 	}	
