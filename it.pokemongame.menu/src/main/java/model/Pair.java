@@ -29,8 +29,9 @@ public class Pair<T1,T2> {
 	}
 	
 	public boolean equals(Object o) {
-		return this.first.equals(((Pair)o).getFirst()) &&
-				this.second.equals(((Pair)o).getSecond());
+		Pair<String,String> obj = (Pair<String,String>)o;
+		return this.first.equals(obj.getFirst()) &&
+				this.second.equals(obj.getSecond());
 	}
 
 }

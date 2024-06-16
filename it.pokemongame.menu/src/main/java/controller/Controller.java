@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.FileNotFoundException;
+
 import interfaces.BattleViewObserver;
 import interfaces.LeaderboardObserver;
 import interfaces.LoginObserver;
@@ -26,7 +28,13 @@ public class Controller implements ViewObserver{
 	// controller start
 	public void start() {
 		this.model = new Model();
-		this.model.initAccountManager(this.getClass().getResource("/accountdata").getPath());
+		this.model.initAccountManager();
+		try {
+			this.model.getAccountManager().openFileDirectory(this.getClass().getResource("/accountdata").getPath());
+			this.model.getAccountManager().readFromFile();
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
 		this.model.initLoginManager();
 		this.view = new ViewImpl(this);
 		this.view.getFrame().firstMenu();
@@ -34,6 +42,7 @@ public class Controller implements ViewObserver{
 	
 	@Override
 	public void initLogin() {
+		this.model.setSave(true);
 		this.loginController = new LoginController(model,view,this);
 		this.loginController.initLogin();
 	}
@@ -94,6 +103,7 @@ public class Controller implements ViewObserver{
 
 	@Override
 	public void quickPlay() {
+		this.model.setSave(false);
 		this.initTeam();
 	}
 

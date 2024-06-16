@@ -1,14 +1,8 @@
 package model.menu;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Map.Entry;
-
 import model.Pair;
-
 import java.util.Set;
 
 public class LoginManager {
@@ -29,8 +23,6 @@ public class LoginManager {
         return INSTANCE;
     }
 
-    // casistiche di successo: Credenziali presenti, account non loggato e slot libero
-    // casistiche fallimento: Credenziali non presenti o account già utilizzato o slot loggato
     public int login(String username, String password, int select) {
         int exit = 0;
         Pair<String,String> credentials = this.fileManager.getKey(username, password);
@@ -44,13 +36,13 @@ public class LoginManager {
             System.out.println("Profilo "+select+" loggato come "+toLogin.getUsername());
         }else{
             if(!this.fileManager.getDataMap().containsKey(credentials)) {
-                exit = 2;
+                exit = 1;
                 System.out.println("Account non trovato!");
             }else if(this.accounts[select] != null) {
-                exit = 3;
-                System.out.println("Account selezionato non è null");
+                exit = 2;
+                System.out.println("Profilo occupato");
             }else if(toLogin.isLogged()) {
-                exit = 1;
+                exit = 3;
                 System.out.println("Account già in uso");
             }
         }
@@ -61,7 +53,6 @@ public class LoginManager {
         // casistiche di successo: username non è già presente
         boolean result = true;
         Set<Entry<Pair<String,String>,Account>> set = this.fileManager.getDataMap().entrySet();
-        Iterator iterator = set.iterator();
 
         // controllo se è già presente un account con l'username inserito
         for(Entry<Pair<String,String>,Account> entry : set) {
@@ -81,6 +72,29 @@ public class LoginManager {
         }
         return result;
     }
+    
+    public boolean registerNoWrite(String username, String password) {
+    	// casistiche di successo: username non è già presente
+        boolean result = true;
+        Set<Entry<Pair<String,String>,Account>> set = this.fileManager.getDataMap().entrySet();
+
+        // controllo se è già presente un account con l'username inserito
+        for(Entry<Pair<String,String>,Account> entry : set) {
+            if(entry.getKey().getFirst().equals(username))
+                result = false;
+        }
+
+        // se non c'è
+        if(result) {
+            Account toRegister = new Account(username, password);
+            Pair<String,String> creds = new Pair<>(username,password);
+            this.fileManager.getDataMap().put(creds, toRegister);
+            System.out.println("Registrato con successo");
+        }else{
+            System.out.println("Username già utilizzato!");
+        }
+        return result;
+    }
 
     public boolean disconnect(int select) {
         boolean result = true;
@@ -92,6 +106,7 @@ public class LoginManager {
 			this.logged[select] = false;
 		}else{
 			System.out.println("Profilo "+select+" non loggato!");
+			result = false;
 		}
         return result;
     }

@@ -9,15 +9,10 @@ public class Model {
 	private LoginManager logger;
 	private Lobby lobby;
 	private Match match;
+	private boolean saveEnabled;
 	
-	public void initAccountManager(String filepath) {
+	public void initAccountManager() {
 		this.fileManager = FileManager.getInstance();
-		try {
-			this.fileManager.openFileDirectory(filepath);
-			this.fileManager.readFromFile();
-		} catch (FileNotFoundException e) {
-			System.out.println(e.getMessage());
-		}
 	}
 	
 	public FileManager getAccountManager() {
@@ -49,13 +44,19 @@ public class Model {
 		
 		this.match = match;
 	}
+
+	public boolean isSaveEnabled() {
+		return this.saveEnabled;
+	}
 	
-	
+	public void setSave(boolean b) {
+		this.saveEnabled = b;
+	}
+
 	public Match getMatch() {
 		return this.match;
 	}
 
-	
 	public void exitLobby() {
 		this.lobby = null;
 	}
