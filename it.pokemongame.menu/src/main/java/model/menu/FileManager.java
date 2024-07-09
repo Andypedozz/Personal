@@ -9,21 +9,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
-
-import model.Pair;
 
 public class FileManager {
     private static FileManager INSTANCE = null;
-    private Map<Pair<String,String>,Account> dataList;
-    private Map<Pair<String,String>,Account> usedData;
-    private Map<String,File> usedFiles;
+    private Map<String,String> credMap;
+    private Map<String,Account> dataList;
+    private Map<String,Account> usedData;
+    private int lastId;
     private File directory;
 
     private FileManager() {
         this.dataList = new HashMap<>();
         this.usedData = new HashMap<>();
-        this.usedFiles = new HashMap<>();
+        this.credMap = new HashMap<>();
     }
 
     public static FileManager getInstance() {
@@ -54,12 +52,16 @@ public class FileManager {
 		this.directory = null;
 	}
 
-    public Map<Pair<String,String>,Account> getDataMap() {
+    public Map<String,Account> getDataMap() {
         return this.dataList;
     }
 
-    public Map<Pair<String,String>,Account> getUsedData() {
+    public Map<String,Account> getUsedData() {
         return this.usedData;
+    }
+
+    public Map<String,String> getCredMap() {
+        return this.credMap;
     }
 
     public List<File> getAllFiles() {
@@ -77,7 +79,7 @@ public class FileManager {
 		}
 		
 		if(read) {
-			int lastId = 0, accountsLoaded = 0;
+			int lastId = -1, accountsLoaded = 0;
 			
             System.out.println("Lettura da file...");
 			if(fileList != null) {
@@ -88,15 +90,13 @@ public class FileManager {
 						System.out.println("Caricamento dati account...");
 						while(scan.hasNextLine()) {
 							String username = scan.nextLine();
-							String password = scan.nextLine();
-							String name = scan.nextLine();
-							String gender = scan.nextLine();
+							String hashedPassword = scan.nextLine();
 							int matches = Integer.parseInt(scan.nextLine());
 							int wins = Integer.parseInt(scan.nextLine());
 							int losses = Integer.parseInt(scan.nextLine());
-							Account account = new Account(username,password,lastId,matches,wins,losses);
-                            Pair<String,String> creds = new Pair<>(username,password);
-							this.getDataMap().put(creds,account);
+							Account account = new Account(username,hashedPassword,lastId,matches,wins,losses);
+                            this.getCredMap().put(username, hashedPassword);
+							this.getDataMap().put(username,account);
 							accountsLoaded++;
 						}
 						scan.close();
@@ -106,6 +106,7 @@ public class FileManager {
 				}
 			}
 			System.out.println(accountsLoaded+" account caricati correttamente!");
+            this.lastId = lastId;
 		}else
 			System.out.println("Directory non trovata!");
         return read;
@@ -136,20 +137,7 @@ public class FileManager {
         return false;
     }
 
-    public void printMap() {
-        Set<Pair<String,String>> keySet = this.dataList.keySet();
-        for(Pair<String,String> cred : keySet) {
-            System.out.println("Username: "+cred.getFirst());
-        }
-    }
-
-    public Pair<String,String> getKey(String username, String password) {
-        Set<Pair<String,String>> keySet = this.dataList.keySet();
-        Pair<String,String> credentials = null;
-        for(Pair<String,String> key : keySet) {
-            if(key.getFirst().equals(username) && key.getSecond().equals(password))
-                credentials = key;
-        }
-        return credentials;
+    public int getLastId() {
+        return this.lastId;
     }
 }

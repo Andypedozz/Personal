@@ -1,9 +1,8 @@
 package model.menu;
 
 import java.io.FileNotFoundException;
-import java.util.Map.Entry;
-import model.Pair;
-import java.util.Set;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class LoginManager {
     private static LoginManager INSTANCE;
@@ -25,46 +24,63 @@ public class LoginManager {
 
     public int login(String username, String password, int select) {
         int exit = 0;
-        Pair<String,String> credentials = this.fileManager.getKey(username, password);
-        
-        Account toLogin = this.fileManager.getDataMap().get(credentials);
-        if(toLogin != null && this.accounts[select] == null && !toLogin.isLogged()) {
-            this.accounts[select] = toLogin;
-            toLogin.setLogged(true);
-            this.logged[select] = true;
-            exit = 0;
-            System.out.println("Profilo "+select+" loggato come "+toLogin.getUsername());
+        String hashedPassword = hashString(password);
+        String storedHashedPassword = this.fileManager.getCredMap().get(username);
+
+        if(storedHashedPassword != null && storedHashedPassword.equals(hashedPassword)) {
+            Account toLogin = this.fileManager.getDataMap().get(username);
+            if(!toLogin.isLogged()) {
+                this.accounts[select] = toLogin;
+                toLogin.setLogged(true);
+                this.logged[select] = true;
+                exit = 0;
+                System.out.println("Profilo "+select+" loggato come "+toLogin.getUsername());
+            }else{
+                exit = 3;
+                System.out.println("Account già in uso");
+            }
         }else{
-            if(!this.fileManager.getDataMap().containsKey(credentials)) {
+            if(!this.fileManager.getCredMap().containsKey(username) || !this.fileManager.getCredMap().containsValue(hashedPassword)) {
                 exit = 1;
                 System.out.println("Account non trovato!");
             }else if(this.accounts[select] != null) {
                 exit = 2;
                 System.out.println("Profilo occupato");
-            }else if(toLogin.isLogged()) {
-                exit = 3;
-                System.out.println("Account già in uso");
             }
         }
         return exit;
     }
 
+    public String hashString(String input) {
+        try{
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] encodedhash = digest.digest(input.getBytes());
+            StringBuilder hexString = new StringBuilder(2 * encodedhash.length);
+            for(byte b : encodedhash) {
+                String hex = Integer.toHexString(0xff & b);
+                if(hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        }catch(NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public boolean register(String username, String password) throws FileNotFoundException {
         // casistiche di successo: username non è già presente
-        boolean result = true;
-        Set<Entry<Pair<String,String>,Account>> set = this.fileManager.getDataMap().entrySet();
+        boolean result = this.fileManager.getCredMap().containsKey(username);
 
-        // controllo se è già presente un account con l'username inserito
-        for(Entry<Pair<String,String>,Account> entry : set) {
-            if(entry.getKey().getFirst().equals(username))
-                result = false;
-        }
 
         // se non c'è
-        if(result) {
-            Account toRegister = new Account(username, password);
-            Pair<String,String> creds = new Pair<>(username,password);
-            this.fileManager.getDataMap().put(creds, toRegister);
+        if(!result) {
+            String hashedPassword = hashString(password);
+            int id = this.fileManager.getLastId() + 1;
+            Account toRegister = new Account(username, hashedPassword,id);
+            this.fileManager.getCredMap().put(username, hashedPassword);
+            this.fileManager.getDataMap().put(username, toRegister);
             this.fileManager.writeNewFile(toRegister);
             System.out.println("Registrato con successo");
         }else{
@@ -74,21 +90,16 @@ public class LoginManager {
     }
     
     public boolean registerNoWrite(String username, String password) {
-    	// casistiche di successo: username non è già presente
-        boolean result = true;
-        Set<Entry<Pair<String,String>,Account>> set = this.fileManager.getDataMap().entrySet();
+        // casistiche di successo: username non è già presente
+        boolean result = this.fileManager.getCredMap().containsKey(username);
 
-        // controllo se è già presente un account con l'username inserito
-        for(Entry<Pair<String,String>,Account> entry : set) {
-            if(entry.getKey().getFirst().equals(username))
-                result = false;
-        }
 
         // se non c'è
-        if(result) {
-            Account toRegister = new Account(username, password);
-            Pair<String,String> creds = new Pair<>(username,password);
-            this.fileManager.getDataMap().put(creds, toRegister);
+        if(!result) {
+            String hashedPassword = hashString(password);
+            Account toRegister = new Account(username, hashedPassword);
+            this.fileManager.getCredMap().put(username, hashedPassword);
+            this.fileManager.getDataMap().put(username, toRegister);
             System.out.println("Registrato con successo");
         }else{
             System.out.println("Username già utilizzato!");

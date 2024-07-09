@@ -18,6 +18,16 @@ public class Account {
         this.logged = false;
     }
 
+    public Account(String username, String password, int id) {
+        this.username = username;
+        this.password = password;
+        this.id = id;
+        this.matches = 0;
+        this.wins = 0;
+        this.losses = 0;
+        this.logged = false;
+    }
+
     public Account(String username, String password, int id, int matches, int wins, int losses) {
         this.username = username;
         this.password = password;

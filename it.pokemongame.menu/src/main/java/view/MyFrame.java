@@ -26,6 +26,10 @@ public class MyFrame extends JFrame{
 	}
 	
 	public void firstMenu() {
+		if(this.teamPanel != null) {
+			this.remove(teamPanel);
+			this.teamPanel = null;
+		}
 		this.firstMenu = new FirstMenu(observer);
 		this.add(firstMenu);
 		this.revalidate();

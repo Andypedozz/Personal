@@ -25,13 +25,11 @@ import java.awt.Color;
 public class MainMenu extends javax.swing.JPanel {
 
     private MenuObserver observer;
-    private BufferedImage background;
     private BufferedImage bg;
     private JButton playBtn;
-    private JButton btnNewButton_1;
     private JButton leaderboardBtn;
-    private JButton btnNewButton_3;
-    private JButton btnNewButton_4;
+    private JButton profileBtn;
+    private JButton instructionsBtn;
     private JButton logoutBtn;
 
     /**
@@ -63,16 +61,6 @@ public class MainMenu extends javax.swing.JPanel {
         gbc_playBtn.gridy = 2;
         add(playBtn, gbc_playBtn);
         
-        btnNewButton_1 = new JButton("See Pokedex");
-        btnNewButton_1.setForeground(new Color(255, 255, 255));
-        btnNewButton_1.setBackground(new Color(69, 69, 69));
-        GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-        gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
-        gbc_btnNewButton_1.insets = new Insets(0, 20, 5, 20);
-        gbc_btnNewButton_1.gridx = 1;
-        gbc_btnNewButton_1.gridy = 4;
-        add(btnNewButton_1, gbc_btnNewButton_1);
-        
         leaderboardBtn = new JButton("Leaderboard");
         leaderboardBtn.setForeground(new Color(255, 255, 255));
         leaderboardBtn.setBackground(new Color(69, 69, 69));
@@ -80,28 +68,28 @@ public class MainMenu extends javax.swing.JPanel {
         gbc_leaderboardBtn.fill = GridBagConstraints.HORIZONTAL;
         gbc_leaderboardBtn.insets = new Insets(0, 20, 5, 20);
         gbc_leaderboardBtn.gridx = 1;
-        gbc_leaderboardBtn.gridy = 6;
+        gbc_leaderboardBtn.gridy = 4;
         add(leaderboardBtn, gbc_leaderboardBtn);
         
-        btnNewButton_3 = new JButton("Profile");
-        btnNewButton_3.setForeground(new Color(255, 255, 255));
-        btnNewButton_3.setBackground(new Color(69, 69, 69));
-        GridBagConstraints gbc_btnNewButton_3 = new GridBagConstraints();
-        gbc_btnNewButton_3.fill = GridBagConstraints.HORIZONTAL;
-        gbc_btnNewButton_3.insets = new Insets(0, 20, 5, 20);
-        gbc_btnNewButton_3.gridx = 1;
-        gbc_btnNewButton_3.gridy = 8;
-        add(btnNewButton_3, gbc_btnNewButton_3);
+        profileBtn = new JButton("Profile");
+        profileBtn.setForeground(new Color(255, 255, 255));
+        profileBtn.setBackground(new Color(69, 69, 69));
+        GridBagConstraints gbc_profileBtn = new GridBagConstraints();
+        gbc_profileBtn.fill = GridBagConstraints.HORIZONTAL;
+        gbc_profileBtn.insets = new Insets(0, 20, 5, 20);
+        gbc_profileBtn.gridx = 1;
+        gbc_profileBtn.gridy = 6;
+        add(profileBtn, gbc_profileBtn);
         
-        btnNewButton_4 = new JButton("Instructions");
-        btnNewButton_4.setForeground(new Color(255, 255, 255));
-        btnNewButton_4.setBackground(new Color(69, 69, 69));
-        GridBagConstraints gbc_btnNewButton_4 = new GridBagConstraints();
-        gbc_btnNewButton_4.fill = GridBagConstraints.HORIZONTAL;
-        gbc_btnNewButton_4.insets = new Insets(0, 20, 5, 20);
-        gbc_btnNewButton_4.gridx = 1;
-        gbc_btnNewButton_4.gridy = 10;
-        add(btnNewButton_4, gbc_btnNewButton_4);
+        instructionsBtn = new JButton("Instructions");
+        instructionsBtn.setForeground(new Color(255, 255, 255));
+        instructionsBtn.setBackground(new Color(69, 69, 69));
+        GridBagConstraints gbc_instructionsBtn = new GridBagConstraints();
+        gbc_instructionsBtn.fill = GridBagConstraints.HORIZONTAL;
+        gbc_instructionsBtn.insets = new Insets(0, 20, 5, 20);
+        gbc_instructionsBtn.gridx = 1;
+        gbc_instructionsBtn.gridy = 8;
+        add(instructionsBtn, gbc_instructionsBtn);
         
         logoutBtn = new JButton("Logout");
         logoutBtn.setForeground(new Color(255, 255, 255));
@@ -110,7 +98,7 @@ public class MainMenu extends javax.swing.JPanel {
         gbc_logoutBtn.fill = GridBagConstraints.HORIZONTAL;
         gbc_logoutBtn.insets = new Insets(0, 20, 5, 20);
         gbc_logoutBtn.gridx = 1;
-        gbc_logoutBtn.gridy = 12;
+        gbc_logoutBtn.gridy = 10;
         add(logoutBtn, gbc_logoutBtn);
     }
 

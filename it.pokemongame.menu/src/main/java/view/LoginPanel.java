@@ -5,12 +5,10 @@ import javax.swing.*;
 import interfaces.LoginObserver;
 
 public class LoginPanel extends JPanel{
-	private LoginObserver observer;
 	private LoginForm2 loginForms[];
 	
 	public LoginPanel(LoginObserver observer) {
 		// init settings
-		this.observer = observer;
 		this.setSize(800,600);
 		this.setLayout(new GridLayout(1,2));
 		

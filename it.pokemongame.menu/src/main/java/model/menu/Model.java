@@ -1,7 +1,5 @@
 package model.menu;
 
-import java.io.FileNotFoundException;
-
 import model.battle.Match;
 
 public class Model {

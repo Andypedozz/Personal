@@ -45,17 +45,16 @@ public class LoginController implements LoginObserver{
 				this.view.getFrame().getLoginPanel().obscurePanel(select);
 			break;
 		case 1:
+			this.view.getFrame().getLoginPanel().accountNotFound();
+			break;
+		case 3:
 			this.view.getFrame().getLoginPanel().alreadyInUse();
 			break;
-		case 2:
-			this.view.getFrame().getLoginPanel().accountNotFound();
 		}
-		// this.model.getLogger().showAccountsState();
 	}
 
 	@Override
 	public void disconnect(int select) {
 		this.model.getLogger().disconnect(select);
-		// this.model.getLogger().showAccountsState();
 	}
 }

@@ -95,7 +95,10 @@ public class TeamController implements TeamObserver{
 	@Override
 	public void backFromTeam() {
 		this.model.exitLobby();
-		this.father.initMainMenu();
+		if(this.model.isSaveEnabled())
+			this.father.initMainMenu();
+		else
+			this.view.getFrame().firstMenu();
 	}
 
 	@Override

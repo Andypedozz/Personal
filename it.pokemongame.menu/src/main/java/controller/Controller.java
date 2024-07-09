@@ -30,7 +30,7 @@ public class Controller implements ViewObserver{
 		this.model = new Model();
 		this.model.initAccountManager();
 		try {
-			this.model.getAccountManager().openFileDirectory(this.getClass().getResource("/accountdata").getPath());
+			this.model.getAccountManager().openFileDirectory("C:/Users/andyp/vsc-workspace/Personal/it.pokemongame.menu/src/main/resources/accountdata");
 			this.model.getAccountManager().readFromFile();
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
