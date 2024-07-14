@@ -34,6 +34,7 @@ public class LeaderboardPanel extends JPanel {
     public LeaderboardPanel(LeaderboardObserver observer) {
         this.observer = observer;
         initComponents();
+
     }
 
     private void initComponents() {
@@ -48,6 +49,12 @@ public class LeaderboardPanel extends JPanel {
         title.setText("Leaderboard");
         add(title, BorderLayout.NORTH);
         add(back, BorderLayout.SOUTH);
+        // add(rankingPanel,BorderLayout.CENTER);
+
+        // rankingPanel.setViewportView(centerPanel);
+        // rankingPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        // rankingPanel.setWheelScrollingEnabled(true);
+        loadRecords();
     }
 
     public void initListeners() {
@@ -56,23 +63,24 @@ public class LeaderboardPanel extends JPanel {
         });
     }
 
-    public void loadRecords(List<Account> accounts) {
-		centerPanel.setLayout(new GridLayout(accounts.size(),4));
-		for(Account a : accounts) {
-			records.add(new JTextField(a.getUsername()));
-			records.add(new JTextField(a.getMatches()));
-			records.add(new JTextField(a.getWins()));
-			records.add(new JTextField(a.getLosses()));
-		}
-		for(JTextField jt : this.records) {	
-			jt.setEditable(false);
-			jt.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-			centerPanel.add(jt);
-		}
-		this.rankingPanel = new JScrollPane(centerPanel);
-		rankingPanel.setLayout(new ScrollPaneLayout());
-		rankingPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		rankingPanel.setWheelScrollingEnabled(true);
-		this.add(rankingPanel);
-	} 
+    public void loadRecords() {
+        List<Account> accounts = observer.getAccounts();
+        centerPanel.setLayout(new GridLayout(accounts.size(), 4));
+        for (Account a : accounts) {
+            records.add(new JTextField(a.getUsername()));
+            records.add(new JTextField(a.getMatches()));
+            records.add(new JTextField(a.getWins()));
+            records.add(new JTextField(a.getLosses()));
+        }
+        for (JTextField jt : this.records) {
+            jt.setEditable(false);
+            jt.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+            centerPanel.add(jt);
+        }
+        this.rankingPanel = new JScrollPane(centerPanel);
+        rankingPanel.setLayout(new ScrollPaneLayout());
+        rankingPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        rankingPanel.setWheelScrollingEnabled(true);
+        this.add(rankingPanel);
+    }
 }
