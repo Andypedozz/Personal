@@ -1,5 +1,0 @@
-package model;
-
-public enum LOGIN_EXIT {
-	LOGGED, NOT_FOUND, ALREADY_LOGGED, NULL_CREDENTIALS;
-}
