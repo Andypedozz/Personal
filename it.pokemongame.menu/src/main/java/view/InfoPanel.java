@@ -143,7 +143,7 @@ public class InfoPanel extends JPanel{
 	// metodo per visualizzare le informazioni sul pokemon
 	public void loadInfo(Pokemon pokemon) {
 		// load image and text
-		Icon icon = new ImageIcon(pokemon.getIconString());
+		Icon icon = new ImageIcon(getClass().getResource(pokemon.getIconString()));
 		pokemonImage.setIcon(icon);
 		moveNames[0].setText(pokemon.getMoveSet().getMove1().getName());
 		moveNames[1].setText(pokemon.getMoveSet().getMove2().getName());
