@@ -1,6 +1,6 @@
 package interfaces;
 
-import model.battle.Match;
+import interfaces.Match;
 
 public interface ViewObserver {
 	void initLogin();

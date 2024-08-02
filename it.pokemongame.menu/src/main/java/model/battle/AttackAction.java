@@ -1,9 +1,9 @@
 package model.battle;
 
-import model.Move;
-import model.Pokemon;
+import interfaces.Move;
+import interfaces.Pokemon;
 
-public class AttackAction extends Action{
+public class AttackAction extends ActionImpl{
 	
 	private Pokemon pTarget;
 	private Move usedMove;
@@ -13,11 +13,6 @@ public class AttackAction extends Action{
 		super(pAttacker, id);
 		this.pTarget = pTarget;
 		this.usedMove = usedMove;
-	}
-	
-	public void changeTarget(Pokemon target) {
-		
-		this.pTarget = target;
 	}
 	
 	public Pokemon getTarget() {

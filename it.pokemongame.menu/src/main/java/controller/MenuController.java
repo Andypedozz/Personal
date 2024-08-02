@@ -2,7 +2,7 @@ package controller;
 
 import interfaces.MenuObserver;
 import interfaces.View;
-import model.menu.Model;
+import interfaces.Model;
 
 public class MenuController implements MenuObserver{
 	private Model model;

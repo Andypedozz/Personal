@@ -1,9 +1,10 @@
 package model.battle;
-
 import java.util.Random;
-import model.Move;
+
+
+import interfaces.Move;
+import interfaces.Pokemon;
 import model.MoveType;
-import model.Pokemon;
 import model.Type;
 
 public class DamageCalculator {

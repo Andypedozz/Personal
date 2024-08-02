@@ -1,5 +1,7 @@
 package interfaces;
 
 public interface BattleUpdateListener {
-    void onBattleEnd();
+    void endTurn();
+    void endBattle(Team winningTeam);
+    void switchFaintedPokemon(boolean teamAction);
 }

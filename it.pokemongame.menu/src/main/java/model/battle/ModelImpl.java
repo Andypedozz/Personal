@@ -1,20 +1,25 @@
-package model.menu;
+package model.battle;
 
-import model.battle.Match;
+import model.menu.FileManager;
+import interfaces.Match;
+import interfaces.Model;
+import model.menu.FileManager;
+import model.menu.Lobby;
+import model.menu.LoginManager;
 
-public class Model {
-	private FileManager fileManager;
+public class ModelImpl implements Model{
+	private FileManager fileManagerImpl;
 	private LoginManager logger;
 	private Lobby lobby;
 	private Match match;
 	private boolean saveEnabled;
 	
 	public void initAccountManager() {
-		this.fileManager = FileManager.getInstance();
+		this.fileManagerImpl = FileManager.getInstance();
 	}
 	
 	public FileManager getAccountManager() {
-		return this.fileManager;
+		return this.fileManagerImpl;
 			
 	}	
 	

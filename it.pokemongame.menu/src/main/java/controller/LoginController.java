@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 
 import interfaces.LoginObserver;
 import interfaces.View;
-import model.menu.Model;
+import interfaces.Model;
 
 public class LoginController implements LoginObserver{
 	private Controller father;

@@ -1,7 +1,8 @@
 package view;
 
 import javax.swing.JButton;
-import model.Pokemon;
+
+import interfaces.Pokemon;
 
 public class PokemonButton extends JButton{
 	

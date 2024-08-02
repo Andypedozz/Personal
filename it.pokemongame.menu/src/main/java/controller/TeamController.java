@@ -3,12 +3,14 @@ package controller;
 import java.util.LinkedList;
 import java.util.List;
 
-import model.Pokemon;
+import interfaces.Pokemon;
 import interfaces.TeamObserver;
 import interfaces.View;
-import model.Team;
-import model.battle.Match;
-import model.menu.Model;
+import model.TeamImpl;
+import model.battle.MatchImpl;
+import interfaces.Team;
+import interfaces.Match;
+import interfaces.Model;
 
 public class TeamController implements TeamObserver{
 	private Controller father;
@@ -113,9 +115,9 @@ public class TeamController implements TeamObserver{
 
 		boolean ready = this.model.getLobby().play();
 		if(ready) {
-			Team team1 = new Team(this.model.getLobby().getTeam(0));
-			Team team2 = new Team(this.model.getLobby().getTeam(1));
-			Match match = new Match(team1, team2);
+			Team team1 = new TeamImpl(this.model.getLobby().getTeam(0));
+			Team team2 = new TeamImpl(this.model.getLobby().getTeam(1));
+			Match match = new MatchImpl(team1, team2);
 			this.father.initBattle(match);
 		}		
 		else

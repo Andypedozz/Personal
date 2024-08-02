@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 import java.util.TreeSet;
-import interfaces.BattleUpdateListener;
-import model.Move;
-import model.Pokemon;
-import model.Team;
-import model.Type;
 
+import interfaces.Action;
+import interfaces.BattleUpdateListener;
+import interfaces.Match;
+import interfaces.Move;
+import interfaces.Pokemon;
+import interfaces.Team;
+import model.Type;
 
 public class ActionsCase {
 
@@ -23,8 +25,12 @@ public class ActionsCase {
 	}
 
 	public void startActions(ArrayList<Action> actions) {
+		boolean battleEnded = false;
 		actions = setAttackOrder(actions);
 		for (Action action : actions) {
+			if (battleEnded) { // Se la battaglia è terminata, esci dal ciclo
+	            break;
+	        }
 			if (action instanceof SwitchAction) {
 
 				switchPokemon(action.getAttacker(), ((SwitchAction) action).getPokemonToSwitch());
@@ -137,9 +143,13 @@ public class ActionsCase {
 				case DANNO_RECUPERO_HP:
 					break;
 				}
+				if (pTarget.getStats().getActualHp() == 0) {
+	                knockout(pTarget);
+	                battleEnded = true; 
+	            }
 			}
 		}
-		listener.onBattleEnd();
+		
 	}
 
 	private ArrayList<Action> setAttackOrder(ArrayList<Action> actions) {
@@ -316,5 +326,26 @@ public class ActionsCase {
 				debRes -= 0.25;
 		}
 		return debRes;
+	}
+	
+	public void knockout(Pokemon pokemon) {
+	    pokemon.setIsFainted(true);
+	    int koCounter = 0;
+	    Team team = (pokemon.equals(match.getPokemonInBattle())) ? match.getTeam1() : match.getTeam2();
+	    for (Pokemon pkmn : team.getTeam()) {
+	        if (pkmn.isFainted()) {
+	            koCounter++;
+	        }
+	    }
+	    if (koCounter == 3) {
+	        Team winningTeam = (team.equals(match.getTeam1())) ? match.getTeam2() : match.getTeam1();
+	        listener.endBattle(winningTeam);
+	    } else {
+	        if (pokemon.equals(match.getPokemonInBattle())) {
+	            listener.switchFaintedPokemon(true);
+	        } else {
+	            listener.switchFaintedPokemon(false);
+	        }
+	    }
 	}
 }

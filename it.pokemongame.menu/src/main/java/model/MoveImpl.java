@@ -1,8 +1,8 @@
 package model;
 
-import model.battle.MovesEffects;
+import interfaces.Move;
 
-public class Move {
+public class MoveImpl implements Move{
 	
 	private final String name;
 	private final Type type;
@@ -15,7 +15,7 @@ public class Move {
 	private final int priority;
 	private int actualPp;
 	
-	public Move(String name, Type type, int pp, int power, int precision, String description, MoveType moveTarget, MovesEffects moveEffect, int priority) {
+	public MoveImpl(String name, Type type, int pp, int power, int precision, String description, MoveType moveTarget, MovesEffects moveEffect, int priority) {
 		
 		this.name = name;
 		this.type = type;
@@ -29,59 +29,59 @@ public class Move {
 		this.priority = priority;
 	}
 	
-	
+	@Override
 	public void setActualPp(int actualPp) {
 		this.actualPp = actualPp;
 	}
 
-	
+	@Override
 	public int getActualPp() {
 		return this.actualPp;
 	}
 	
-	
+	@Override
 	public MovesEffects getMoveEffect() {
 		
 		return this.moveEffect;
 	}
-	
+	@Override
 	public int getPp() {
 		return this.pp;
 	}
 
-	
+	@Override
 	public int getPrecision() {
 		return this.precision;
 	}
 
-	
+	@Override
 	public String getName() {
 		return this.name;
 	}
 
-	
+	@Override
 	public int getPower() {
 		return this.power;
 	}
 
-	
+	@Override
 	public String getDescription() {
 		return this.description;
 	}
-	
+	@Override
 	public Type getType() {
 		return this.type;
 	}
-	
+	@Override
 	public MoveType getMoveType() {
 		return this.moveType;
 	}
-	
-	public Move duplicateMove() {
-		return new Move(this.name, this.type, this.pp, this.power, this.precision, this.description, this.moveType, this.moveEffect, this.priority);
+	@Override
+	public MoveImpl duplicateMove() {
+		return new MoveImpl(this.name, this.type, this.pp, this.power, this.precision, this.description, this.moveType, this.moveEffect, this.priority);
 	}
 
-	
+	@Override
 	public int getPriority() {
 		return this.priority;
 	}

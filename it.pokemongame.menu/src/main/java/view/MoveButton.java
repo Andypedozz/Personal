@@ -2,8 +2,8 @@ package view;
 
 import javax.swing.JButton;
 
-import model.Move;
-import model.Pokemon;
+import interfaces.Move;
+import interfaces.Pokemon;
 
 public class MoveButton extends JButton{
 	

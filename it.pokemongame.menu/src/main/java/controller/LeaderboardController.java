@@ -5,7 +5,7 @@ import java.util.List;
 import interfaces.LeaderboardObserver;
 import interfaces.View;
 import model.menu.Account;
-import model.menu.Model;
+import interfaces.Model;
 
 public class LeaderboardController implements LeaderboardObserver {
 	private Model model;

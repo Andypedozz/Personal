@@ -3,8 +3,9 @@ package model.menu;
 import java.util.LinkedList;
 import java.util.List;
 
-import model.Pokedex;
-import model.Pokemon;
+import interfaces.Pokedex;
+import interfaces.Pokemon;
+import model.PokedexImpl;
 
 public class Lobby {
 	private static Lobby INSTANCE = null;
@@ -13,7 +14,7 @@ public class Lobby {
 	private Pokedex pokedex;
 	
 	private Lobby() {
-		this.pokedex = new Pokedex();
+		this.pokedex = new PokedexImpl();
 		this.teams = new LinkedList[2];
 		this.teams[0] = new LinkedList<>();
 		this.teams[1] = new LinkedList<>();
@@ -83,7 +84,7 @@ public class Lobby {
 
 	
 	public void initPokedex() {
-		this.pokedex = new Pokedex();
+		this.pokedex = new PokedexImpl();
 	}
 
 	

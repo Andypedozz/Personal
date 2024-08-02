@@ -4,10 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
-
-import model.menu.Model;
+import interfaces.Model;
+import model.battle.ModelImpl;
 
 public class TestLoginManager {
 
@@ -20,7 +19,7 @@ public class TestLoginManager {
 	
     @Test
     public void testLogin() {
-    	model = new Model();
+    	model = new ModelImpl();
     	System.out.println("---- TEST LOGIN ----");
     	model.initLoginManager();
     	assertTrue(model.getLogger().registerNoWrite("andypedoz", "0000"));
@@ -35,7 +34,7 @@ public class TestLoginManager {
     
     @Test
     public void testReady() {
-    	model = new Model();
+    	model = new ModelImpl();
     	System.out.println("---- TEST READY ----");
     	model.initLoginManager();
     	assertTrue(model.getLogger().ready());
@@ -46,7 +45,7 @@ public class TestLoginManager {
     
     @Test
     public void testDisconnect() {
-    	model = new Model();
+    	model = new ModelImpl();
     	System.out.println("---- TEST DISCONNECT ----");
     	model.initLoginManager();
     	model.getLogger().login("andypedoz","0000", 0);
@@ -58,7 +57,7 @@ public class TestLoginManager {
 	
 	@Test
     public void testRegister() {
-    	model = new Model();
+    	model = new ModelImpl();
     	System.out.println("---- TEST REGISTER ----");
     	model.initLoginManager();
     	assertFalse(model.getLogger().registerNoWrite("andypedoz", "0000"));

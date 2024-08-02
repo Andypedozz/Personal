@@ -5,12 +5,13 @@ import java.io.FileNotFoundException;
 import interfaces.BattleViewObserver;
 import interfaces.LeaderboardObserver;
 import interfaces.LoginObserver;
-import model.battle.Match;
-import model.menu.Model;
+import interfaces.Match;
+import interfaces.Model;
 import interfaces.MenuObserver;
 import interfaces.TeamObserver;
 import interfaces.View;
 import interfaces.ViewObserver;
+import model.battle.ModelImpl;
 import view.ViewImpl;
 
 public class Controller implements ViewObserver{
@@ -27,7 +28,7 @@ public class Controller implements ViewObserver{
 	
 	// controller start
 	public void start() {
-		this.model = new Model();
+		this.model = new ModelImpl();
 		this.model.initAccountManager();
 		try {
 			this.model.getAccountManager().openFileDirectory("C:/Users/andyp/vsc-workspace/Personal/it.pokemongame.menu/src/main/resources/accountdata");

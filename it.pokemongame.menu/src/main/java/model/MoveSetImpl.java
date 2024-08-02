@@ -1,13 +1,16 @@
 package model;
 
-public class MoveSet {
+import interfaces.MoveSet;
+import interfaces.Move;
+
+public class MoveSetImpl implements MoveSet{
 	
 	private Move move1;
 	private Move move2;
 	private Move move3;
 	private Move move4;
 	
-	public MoveSet(Move move1, Move move2, Move move3, Move move4) {
+	public MoveSetImpl(Move move1, Move move2, Move move3, Move move4) {
 		
 		this.move1 = move1.duplicateMove();
 		this.move2 = move2.duplicateMove();
@@ -35,7 +38,7 @@ public class MoveSet {
 		Move newMove2 = this.move2.duplicateMove();
 		Move newMove3 = this.move3.duplicateMove();
 		Move newMove4 = this.move4.duplicateMove();
-		return new MoveSet(newMove1, newMove2, newMove3, newMove4);
+		return new MoveSetImpl(newMove1, newMove2, newMove3, newMove4);
 	}
 
 }

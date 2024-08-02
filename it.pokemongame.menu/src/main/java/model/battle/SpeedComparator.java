@@ -2,6 +2,8 @@ package model.battle;
 
 import java.util.Comparator;
 
+import interfaces.Action;
+
 public class SpeedComparator implements Comparator<Action>{
 
 	@Override

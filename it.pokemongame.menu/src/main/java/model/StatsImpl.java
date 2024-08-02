@@ -1,7 +1,8 @@
 package model;
 
+import interfaces.Stats;
 
-public class Stats {
+public class StatsImpl implements Stats{
 	
 	//Attributi di base del pokemon
 	private final int hp;
@@ -21,7 +22,7 @@ public class Stats {
 	private int precision;
 	private int elusion;
 	
-	public Stats(int hp, int attack, int defense, int spAttack, int spDefense, int speed) {
+	public StatsImpl(int hp, int attack, int defense, int spAttack, int spDefense, int speed) {
 		
 		this.hp = hp;
 		this.attack = attack;
@@ -39,120 +40,120 @@ public class Stats {
 		this.elusion = 100;
 	}
 
-	
+	@Override
 	public int getHp() {
 		return this.hp;
 	}
 
-	
+	@Override
 	public int getAttack() {
 		return this.attack;
 	}
 
-	
+	@Override
 	public int getDefense() {
 		return defense;
 	}
 
-	
+	@Override
 	public int getSpeed() {
 		return this.speed;
 	}
 
-	
+	@Override
 	public void setActualHp(int actualHp) {
 		this.actualHp = actualHp;
 		
 	}
 
-	
+	@Override
 	public int getActualHp() {
 		return this.actualHp;
 	}
 
-	
+	@Override
 	public void setActualAttack(int actualAttack) {
 		this.actualAttack = actualAttack;
 	}
 
-	
+	@Override
 	public int getActualAttack() {
 		return this.actualAttack;
 	}
 
-	
+	@Override
 	public void setActualDefense(int actualDefense) {
 		this.actualDefense = actualDefense;
 	}
 
-	
+	@Override
 	public int getActualDefense() {
 		return this.actualDefense;
 	}
 
-	
+	@Override
 	public void setActualSpeed(int actualSpeed) {
 		this.actualSpeed = actualSpeed;
 	}
 
-	
+	@Override
 	public int getActualSpeed() {
 		return this.actualSpeed;
 	}
 
-	
+	@Override
 	public int getSpAttack() {
 		return this.spAttack;
 	}
 
-	
+	@Override
 	public int getSpDefense() {
 		return this.spDefense;
 	}
 
-	
+	@Override
 	public void setActualSpAttack(int actualSpAttack) {
 		this.actualSpAttack = actualSpAttack;
 	}
 
-	
+	@Override
 	public int getActualSpAttack() {
 		return this.actualSpAttack;
 	}
 
-	
+	@Override
 	public void setActualSpDefense(int actualSpDefense) {
 		this.actualSpDefense = actualSpDefense;
 	}
 
-	
+	@Override
 	public int getActualSpDefense() {
 		return this.actualSpDefense;
 	}
 
-	
+	@Override
 	public void setPrecision(int precision) {
 		this.precision = precision;
 	}
 
-	
+	@Override
 	public void setElusion(int elusion) {
 		this.elusion = elusion;
 	}
 
-	
+	@Override
 	public int getPrecision() {
 		return this.precision;
 	}
 
-	
+	@Override
 	public int getElusion() {
 		return this.elusion;
 	}
 	
 	public Stats duplicate() {
 		
-		return new Stats(this.hp, this.attack, this.defense, this.spAttack, this.spDefense, this.speed);
+		return new StatsImpl(this.hp, this.attack, this.defense, this.spAttack, this.spDefense, this.speed);
 	}
 	
 

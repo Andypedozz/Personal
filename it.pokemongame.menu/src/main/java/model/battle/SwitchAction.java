@@ -1,8 +1,8 @@
 package model.battle;
 
-import model.Pokemon;
+import interfaces.Pokemon;
 
-public class SwitchAction extends Action{
+public class SwitchAction extends ActionImpl{
 	
 	private Pokemon pokemonToSwitch;
 	

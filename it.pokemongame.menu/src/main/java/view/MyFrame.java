@@ -2,7 +2,7 @@ package view;
 
 import javax.swing.*;
 import interfaces.ViewObserver;
-import model.Pokemon;
+import interfaces.Pokemon;
 
 public class MyFrame extends JFrame{
 	private ViewObserver observer;
@@ -12,8 +12,7 @@ public class MyFrame extends JFrame{
 	private InfoPanel infoPanel;
 	private MainMenu mmPanel;
 	private LeaderboardPanel leadPanel;
-	private SelectMoveView selectMoveView;
-	private SwitchView switchView;
+	private BattlePanel battlePanel;
 	
 	public MyFrame(ViewObserver observer) {
 		this.observer = observer;
@@ -123,6 +122,24 @@ public class MyFrame extends JFrame{
 		this.validate();
 	}
 	
+	public void battleMenu() {
+	    if (this.teamPanel != null) {
+	        this.remove(teamPanel);
+	        this.teamPanel = null; 
+	    }
+	    if (this.battlePanel == null) {  
+	        this.battlePanel = new BattlePanel(); 
+	    }
+	    this.add(battlePanel);
+	    this.setSize(1200,700);
+		this.setLocationRelativeTo(null);
+		this.validate();
+	}
+	
+	public BattlePanel getBattlePanel() {	
+		return this.battlePanel;
+	}
+	
 	public LoginPanel getLoginPanel() {
 		return this.loginPanel;
 	}
@@ -130,16 +147,6 @@ public class MyFrame extends JFrame{
 	public TeamPanel getTeamPanel() {
 		return this.teamPanel;
 	}
-	
-	public SelectMoveView getSelectMoveView() {
-    	
-    	return this.selectMoveView;
-    }
-	
-	public SwitchView getSwitchView() {
-    	
-    	return this.switchView;
-    }
 	
 	public LeaderboardPanel getLeaderboardPanel() {
 		return this.leadPanel;

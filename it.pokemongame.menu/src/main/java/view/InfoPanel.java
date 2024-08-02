@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import interfaces.ViewObserver;
-import model.Pokemon;
+import interfaces.Pokemon;
 
 public class InfoPanel extends JPanel{
 	private ViewObserver observer;
