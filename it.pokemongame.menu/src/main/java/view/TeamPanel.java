@@ -22,8 +22,6 @@ public class TeamPanel extends JPanel{
 		this.observer = observer;
 		this.setSize(800,600);
 		this.setLayout(new GridLayout(1,3));
-		Color startColor = Color.DARK_GRAY;
-		Color endColor = Color.WHITE;
 		
 		// init components
 		// buttons panel
@@ -205,6 +203,10 @@ public class TeamPanel extends JPanel{
 	public void notReady() {
 		JFrame frame = new JFrame();
 		JOptionPane.showMessageDialog(frame, "I due team non sono pronti!");
+	}
+
+	public LobbyPokemonButton[] getPokeButtons() {
+		return pokeButtons;
 	}
 	
 }

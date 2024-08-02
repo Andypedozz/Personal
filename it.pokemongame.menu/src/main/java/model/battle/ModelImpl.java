@@ -3,7 +3,6 @@ package model.battle;
 import model.menu.FileManager;
 import interfaces.Match;
 import interfaces.Model;
-import model.menu.FileManager;
 import model.menu.Lobby;
 import model.menu.LoginManager;
 

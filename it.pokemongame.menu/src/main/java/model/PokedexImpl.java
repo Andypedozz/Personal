@@ -1,11 +1,9 @@
 package model;
 
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import interfaces.Move;
 import interfaces.Stats;
-import model.MovesEffects;
 import interfaces.Pokemon;
 import interfaces.MoveSet;
 import interfaces.Pokedex;

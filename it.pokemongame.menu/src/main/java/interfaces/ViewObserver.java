@@ -1,7 +1,5 @@
 package interfaces;
 
-import interfaces.Match;
-
 public interface ViewObserver {
 	void initLogin();
 	void initTeam();

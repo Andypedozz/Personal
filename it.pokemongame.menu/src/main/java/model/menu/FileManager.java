@@ -30,13 +30,6 @@ public class FileManager {
         return INSTANCE;
     }
 
-    public void openDirectory(String filepath) throws FileNotFoundException {
-        File file = new File(filepath);
-        if(!file.exists())
-            throw new FileNotFoundException("Directory non trovata");
-        this.directory = new File(filepath);
-    }
-
     public File getOpenDirectory() {
         return this.directory;
     }
@@ -107,8 +100,7 @@ public class FileManager {
 			}
 			System.out.println(accountsLoaded+" account caricati correttamente!");
             this.lastId = lastId;
-		}else
-			System.out.println("Directory non trovata!");
+        }
         return read;
     }
 
