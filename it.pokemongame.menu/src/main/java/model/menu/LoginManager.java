@@ -1,8 +1,6 @@
 package model.menu;
 
 import java.io.FileNotFoundException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class LoginManager {
     private static LoginManager INSTANCE;
@@ -24,7 +22,7 @@ public class LoginManager {
 
     public int login(String username, String password, int select) {
         int exit = 0;
-        String hashedPassword = hashString(password);
+        String hashedPassword = Hashing.hashString(password);
         String storedHashedPassword = this.fileManager.getCredMap().get(username);
 
         if(storedHashedPassword != null && storedHashedPassword.equals(hashedPassword)) {
@@ -51,24 +49,6 @@ public class LoginManager {
         return exit;
     }
 
-    public String hashString(String input) {
-        try{
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] encodedhash = digest.digest(input.getBytes());
-            StringBuilder hexString = new StringBuilder(2 * encodedhash.length);
-            for(byte b : encodedhash) {
-                String hex = Integer.toHexString(0xff & b);
-                if(hex.length() == 1) {
-                    hexString.append('0');
-                }
-                hexString.append(hex);
-            }
-            return hexString.toString();
-        }catch(NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public boolean register(String username, String password) throws FileNotFoundException {
         // casistiche di successo: username non è già presente
         boolean result = this.fileManager.getCredMap().containsKey(username);
@@ -76,7 +56,7 @@ public class LoginManager {
 
         // se non c'è
         if(!result) {
-            String hashedPassword = hashString(password);
+            String hashedPassword = Hashing.hashString(password);
             int id = this.fileManager.getLastId() + 1;
             Account toRegister = new Account(username, hashedPassword,id);
             this.fileManager.getCredMap().put(username, hashedPassword);
@@ -96,7 +76,7 @@ public class LoginManager {
 
         // se non c'è
         if(!result) {
-            String hashedPassword = hashString(password);
+            String hashedPassword = Hashing.hashString(password);
             Account toRegister = new Account(username, hashedPassword);
             this.fileManager.getCredMap().put(username, hashedPassword);
             this.fileManager.getDataMap().put(username, toRegister);
