@@ -15,7 +15,7 @@ public class PokedexImpl implements Pokedex {
 	private List<Pokemon> pokedex;
 	
 	public PokedexImpl() {
-		URL path = this.getClass().getResource("/pokemonSprites");
+		String path = "/pokemonSprites";
 		Move zuffa = new MoveImpl("Zuffa", Type.LOTTA, 5, 120, 100, "Chi la usa attacca abbassando la guardia. La propria Difesa e difesa speciale si riducono.", MoveType.FISICA, MovesEffects.DANNO_RIDUZIONE_DIFESA_E_DIFESA_SPECIALE_SE_STESSO, 1);
 		Move danzaspada = new MoveImpl("Danzaspada", Type.NORMALE, 20, 0, 100, "Chi la usa aumenta le proprie statistiche di attacco", MoveType.FISICA, MovesEffects.AUMENTA_ATTACCOX2, 1);
 		Move assorbipugno = new MoveImpl("Assorbipugno", Type.LOTTA, 10, 75, 100, "Pugno che assorbe energia. Fa recuperare una quantità di PS pari alla metà del danno inferto.", MoveType.FISICA, MovesEffects.DANNO_RECUPERO_HP, 1);
@@ -66,16 +66,16 @@ public class PokedexImpl implements Pokedex {
 		MoveSet swampertMoveset = new MoveSetImpl(surf, fanghiglia, acquagetto, agilita);
 		
 		
-		Pokemon lucario = new PokemonImpl("Lucario", Arrays.asList(Type.LOTTA, Type.ACCIAIO) , lucarioStats, lucarioMoveset.duplicate(), path.getPath()+"\\lucario.png");
-		Pokemon infernape = new PokemonImpl("Infernape", Arrays.asList(Type.FUOCO, Type.LOTTA), infernapeStats, infernapeMoveset.duplicate(), path.getPath()+"\\infernape.png");
-		Pokemon blissey = new PokemonImpl("Blissey", Arrays.asList(Type.NORMALE) , blisseyStats, blisseyMoveset.duplicate(), path.getPath()+"\\blissey.png");
-		Pokemon staraptor = new PokemonImpl("Staraptor", Arrays.asList(Type.NORMALE, Type.VOLANTE), staraptorStats, staraptorMoveset.duplicate(), path.getPath()+"\\staraptor.png");
-		Pokemon zoroark = new PokemonImpl("Zoroark", Arrays.asList(Type.BUIO) , zoroarkStats, zoroarkMoveset.duplicate(), path.getPath()+"\\zoroark.png");
-		Pokemon swampert = new PokemonImpl("Swampert", Arrays.asList(Type.ACQUA, Type.TERRA), swampertStats, swampertMoveset.duplicate(), path.getPath()+"\\swampert.png");
-		Pokemon blaziken = new PokemonImpl("Blaziken", Arrays.asList(Type.FUOCO, Type.LOTTA), blazikenStats, blazikenMoveset.duplicate(), path.getPath()+"\\blaziken.png");
-		Pokemon salamence = new PokemonImpl("Salamence", Arrays.asList(Type.DRAGO, Type.VOLANTE), salamenceStats, salamenceMoveset.duplicate(), path.getPath()+"\\salamence.png");
-		Pokemon luxray = new PokemonImpl("Luxray", Arrays.asList(Type.ELETTRO), luxrayStats, luxrayMoveset.duplicate(), path.getPath()+"\\luxray.png");
-		Pokemon metagross = new PokemonImpl("Metagross", Arrays.asList(Type.ACCIAIO, Type.PSICO), metagrossStats, metagrossMoveset.duplicate(), path.getPath()+"\\metagross.png");
+		Pokemon lucario = new PokemonImpl("Lucario", Arrays.asList(Type.LOTTA, Type.ACCIAIO) , lucarioStats, lucarioMoveset.duplicate(), path+"\\lucario.png");
+		Pokemon infernape = new PokemonImpl("Infernape", Arrays.asList(Type.FUOCO, Type.LOTTA), infernapeStats, infernapeMoveset.duplicate(), path+"\\infernape.png");
+		Pokemon blissey = new PokemonImpl("Blissey", Arrays.asList(Type.NORMALE) , blisseyStats, blisseyMoveset.duplicate(), path+"\\blissey.png");
+		Pokemon staraptor = new PokemonImpl("Staraptor", Arrays.asList(Type.NORMALE, Type.VOLANTE), staraptorStats, staraptorMoveset.duplicate(), path+"\\staraptor.png");
+		Pokemon zoroark = new PokemonImpl("Zoroark", Arrays.asList(Type.BUIO) , zoroarkStats, zoroarkMoveset.duplicate(), path+"\\zoroark.png");
+		Pokemon swampert = new PokemonImpl("Swampert", Arrays.asList(Type.ACQUA, Type.TERRA), swampertStats, swampertMoveset.duplicate(), path+"\\swampert.png");
+		Pokemon blaziken = new PokemonImpl("Blaziken", Arrays.asList(Type.FUOCO, Type.LOTTA), blazikenStats, blazikenMoveset.duplicate(), path+"\\blaziken.png");
+		Pokemon salamence = new PokemonImpl("Salamence", Arrays.asList(Type.DRAGO, Type.VOLANTE), salamenceStats, salamenceMoveset.duplicate(), path+"\\salamence.png");
+		Pokemon luxray = new PokemonImpl("Luxray", Arrays.asList(Type.ELETTRO), luxrayStats, luxrayMoveset.duplicate(), path+"\\luxray.png");
+		Pokemon metagross = new PokemonImpl("Metagross", Arrays.asList(Type.ACCIAIO, Type.PSICO), metagrossStats, metagrossMoveset.duplicate(), path+"\\metagross.png");
 	
 		this.pokedex = List.of(lucario, infernape, blissey, staraptor, zoroark, swampert, blaziken, salamence, luxray, metagross);
 		
