@@ -141,18 +141,6 @@ public class TeamPanel extends JPanel{
 		
 		// play logic
 		this.play.addActionListener(e -> observer.play());
-		
-		KeyAdapter enter = new KeyAdapter() {
-			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_LEFT)
-					observer.addPokemon(0);
-				else if(e.getKeyCode() == KeyEvent.VK_RIGHT)
-					observer.addPokemon(1);
-			}
-		};
-		for(LobbyPokemonButton btn : this.pokeButtons) {
-			btn.addKeyListener(enter);
-		}
 	}
 	
 	public void pokemonNotSelected() {
