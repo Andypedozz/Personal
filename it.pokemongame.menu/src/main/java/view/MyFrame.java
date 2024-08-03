@@ -99,7 +99,6 @@ public class MyFrame extends JFrame{
 		}
 		if(this.teamPanel == null) {
 			this.teamPanel = new TeamPanel(observer.getTeamObserver());
-			this.teamPanel.initListeners();
 		}
 		if(this.mmPanel != null) {
 			this.remove(mmPanel);

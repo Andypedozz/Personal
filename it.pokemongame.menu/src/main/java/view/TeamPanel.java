@@ -2,6 +2,8 @@ package view;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.*;
@@ -59,6 +61,7 @@ public class TeamPanel extends JPanel{
 		gridPane.setLayout(new ScrollPaneLayout());
 		gridPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		gridPane.setWheelScrollingEnabled(true);
+		gridPane.getVerticalScrollBar().setUnitIncrement(16);
 		pokeButtons = new LobbyPokemonButton[observer.getPokedexSize()];
 		this.teams = new LinkedList[2];
 		teams[0] = new LinkedList<LobbyPokemonButton>();
@@ -82,9 +85,10 @@ public class TeamPanel extends JPanel{
 		this.add(gridPane);
 		this.add(rightPanel);
 		this.setVisible(true);
+		initListeners();
 	}
 	
-	public void initListeners() {
+	private void initListeners() {
 		// back logic
 		this.back.addActionListener(e -> observer.backFromTeam());
 		
@@ -137,14 +141,17 @@ public class TeamPanel extends JPanel{
 		
 		// play logic
 		this.play.addActionListener(e -> observer.play());
-	}
-	
-	public void loadButtons(List<String> pokemonNames, List<String> paths) {
-		this.icons = new ImageIcon[observer.getPokedexSize()];
-		for(int i = 0; i < observer.getPokedexSize(); i++) {
-			icons[i] = new ImageIcon(paths.get(i));
-			this.pokeButtons[i].setIcon(icons[i]);
-			this.pokeButtons[i].setPokemonName(pokemonNames.get(i));
+		
+		KeyAdapter enter = new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_LEFT)
+					observer.addPokemon(0);
+				else if(e.getKeyCode() == KeyEvent.VK_RIGHT)
+					observer.addPokemon(1);
+			}
+		};
+		for(LobbyPokemonButton btn : this.pokeButtons) {
+			btn.addKeyListener(enter);
 		}
 	}
 	
