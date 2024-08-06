@@ -6,7 +6,7 @@ import model.menu.LoginManager;
 
 public interface Model {
 	FileManager getAccountManager();
-	LoginManager getLogger();
+	LoginManager getLoginManager();
 	Lobby getLobby();
 	void initLobby();
 	void setMatch(Match match);

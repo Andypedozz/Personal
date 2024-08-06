@@ -4,7 +4,7 @@ import java.awt.GridLayout;
 import javax.swing.*;
 import interfaces.LoginObserver;
 
-public class LoginPanel extends JPanel{
+public class LoginPanel extends JPanel {
 	private LoginForm2 loginForms[];
 	
 	public LoginPanel(LoginObserver observer) {
@@ -43,4 +43,10 @@ public class LoginPanel extends JPanel{
 	public void obscurePanel(int select) {
 		this.loginForms[select].disableButtons();
 	}
+
+	public void accountAlreadyRegistered() {
+		JFrame frame = new JFrame();
+		JOptionPane.showMessageDialog(frame,"Account già esistente!");
+	}
+
 }

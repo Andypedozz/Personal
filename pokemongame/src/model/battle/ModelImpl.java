@@ -13,6 +13,10 @@ public class ModelImpl implements Model{
 	private Match match;
 	private boolean saveEnabled;
 	
+	public ModelImpl() {
+		this.fileManagerImpl = FileManager.getInstance();
+	}
+	
 	public void initAccountManager() {
 		this.fileManagerImpl = FileManager.getInstance();
 	}
@@ -27,7 +31,7 @@ public class ModelImpl implements Model{
 		System.out.println("LoginManager inizializzato!");
 	}
 	
-	public LoginManager getLogger() {
+	public LoginManager getLoginManager() {
 		return this.logger;	
 	}
 

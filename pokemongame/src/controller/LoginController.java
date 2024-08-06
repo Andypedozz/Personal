@@ -24,22 +24,26 @@ public class LoginController implements LoginObserver{
 	
 	@Override
 	public void register(String username, String password, String name, String gender) {
-		if(!username.isBlank() && !password.isBlank() && !name.isBlank() && !gender.isBlank())
+		if(!username.isBlank() && !password.isBlank() && !name.isBlank() && !gender.isBlank()) {
 			try {
-				this.model.getLogger().register(username, password);
+				boolean result = this.model.getLoginManager().register(username, password);
+				if(!result) {
+					this.view.getFrame().getLoginPanel().accountAlreadyRegistered();
+				}
 			} catch (FileNotFoundException e) {
 				System.out.println(e.getMessage());
 			}
-		else
+		}else {
 			this.view.getFrame().getLoginPanel().signUpFailed();
+		}
 	}
 
 	@Override
 	public void login(int select, String username, String password) {
-		int logged = this.model.getLogger().login(username, password, select);
+		int logged = this.model.getLoginManager().login(username, password, select);
 		switch(logged) {
 		case 0:
-			if(this.model.getLogger().ready())
+			if(this.model.getLoginManager().ready())
 				this.father.initMainMenu();
 			else
 				this.view.getFrame().getLoginPanel().obscurePanel(select);
@@ -55,6 +59,6 @@ public class LoginController implements LoginObserver{
 
 	@Override
 	public void disconnect(int select) {
-		this.model.getLogger().disconnect(select);
+		this.model.getLoginManager().disconnect(select);
 	}
 }

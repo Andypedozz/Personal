@@ -10,9 +10,16 @@ import interfaces.Pokedex;
 
 public class PokedexImpl implements Pokedex {
 	
-	private List<Pokemon> pokedex;
+	public static Pokedex INSTANCE = null;
+	private List<Pokemon> list;
 	
-	public PokedexImpl() {
+	public static Pokedex getInstance() {
+		if(INSTANCE == null)
+			INSTANCE = new PokedexImpl();
+		return INSTANCE;
+	}
+	
+	private PokedexImpl() {
 		String path = "/resources/pokemonSprites";
 		Move zuffa = new MoveImpl("Zuffa", Type.LOTTA, 5, 120, 100, "Chi la usa attacca abbassando la guardia. La propria Difesa e difesa speciale si riducono.", MoveType.FISICA, MovesEffects.DANNO_RIDUZIONE_DIFESA_E_DIFESA_SPECIALE_SE_STESSO, 1);
 		Move danzaspada = new MoveImpl("Danzaspada", Type.NORMALE, 20, 0, 100, "Chi la usa aumenta le proprie statistiche di attacco", MoveType.FISICA, MovesEffects.AUMENTA_ATTACCOX2, 1);
@@ -75,18 +82,18 @@ public class PokedexImpl implements Pokedex {
 		Pokemon luxray = new PokemonImpl("Luxray", Arrays.asList(Type.ELETTRO), luxrayStats, luxrayMoveset.duplicate(), path+"\\luxray.png");
 		Pokemon metagross = new PokemonImpl("Metagross", Arrays.asList(Type.ACCIAIO, Type.PSICO), metagrossStats, metagrossMoveset.duplicate(), path+"\\metagross.png");
 	
-		this.pokedex = List.of(lucario, infernape, blissey, staraptor, zoroark, swampert, blaziken, salamence, luxray, metagross);
+		this.list = List.of(lucario, infernape, blissey, staraptor, zoroark, swampert, blaziken, salamence, luxray, metagross);
 		
 	}
 
 	
 	public List<Pokemon> getList() {
-		return this.pokedex;
+		return this.list;
 	}
 
 	
 	public Pokemon getPokemon(String name) {
-		for(Pokemon p : this.pokedex) {
+		for(Pokemon p : this.list) {
 			if(p.getName().equals(name))
 				return p;
 		}

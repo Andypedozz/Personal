@@ -31,7 +31,6 @@ public class TeamController implements TeamObserver{
 	public void initTeam() {
 		if(this.model.getLobby() == null) {
 			this.model.initLobby();
-			this.model.getLobby().initPokedex();
 		}
 		this.view.getFrame().teamMenu();
 		loadButtons();
@@ -43,6 +42,7 @@ public class TeamController implements TeamObserver{
 		this.model.getLobby().selectPokemon(name);
 	}
 
+	// MIGLIORABILE
 	@Override
 	public void addPokemon(int select) {
 		int added = this.model.getLobby().addPokemon(select);

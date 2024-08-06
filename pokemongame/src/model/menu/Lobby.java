@@ -14,7 +14,7 @@ public class Lobby {
 	private Pokedex pokedex;
 	
 	private Lobby() {
-		this.pokedex = new PokedexImpl();
+		this.pokedex = PokedexImpl.getInstance();
 		this.teams = new LinkedList[2];
 		this.teams[0] = new LinkedList<>();
 		this.teams[1] = new LinkedList<>();
@@ -81,12 +81,6 @@ public class Lobby {
 		this.selectedPokemon = this.pokedex.getPokemon(name);
 		System.out.println("Selezionato "+this.selectedPokemon.getName());
 	}
-
-	
-	public void initPokedex() {
-		this.pokedex = new PokedexImpl();
-	}
-
 	
 	public Pokedex getPokedex() {
 		return this.pokedex;

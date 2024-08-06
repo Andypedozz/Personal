@@ -32,8 +32,8 @@ public class MenuController implements MenuObserver{
 
 	@Override
 	public void back() {
-		this.model.getLogger().disconnect(1);
-		this.model.getLogger().disconnect(0);
+		this.model.getLoginManager().disconnect(1);
+		this.model.getLoginManager().disconnect(0);
 		this.father.initLogin();
 	}
 }

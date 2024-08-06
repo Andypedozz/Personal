@@ -20,42 +20,80 @@ public class LoginManager {
         return INSTANCE;
     }
 
+    /**
+     * 
+     * @param username
+     * @param password
+     * @param select
+     * @return 0 = login con successo
+     * 		   1 = account non trovato
+     * 		   2 = Profilo occupato
+     * 		   3 = Account già in uso
+     */
+//    public int login(String username, String password, int select) {
+//        int exit = 0;
+//        String hashedPassword = Hashing.hashString(password);
+//        String storedHashedPassword = this.fileManager.getCredMap().get(username);
+//
+//        if(storedHashedPassword != null && storedHashedPassword.equals(hashedPassword)) {
+//            Account toLogin = this.fileManager.getDataMap().get(username);
+//            if(!toLogin.isLogged()) {
+//                this.accounts[select] = toLogin;
+//                toLogin.setLogged(true);
+//                this.logged[select] = true;
+//                exit = 0;
+//                System.out.println("Profilo "+select+" loggato come "+toLogin.getUsername());
+//            }else{
+//                exit = 3;
+//                System.out.println("Account già in uso");
+//            }
+//        }else{
+//            if(!this.fileManager.getCredMap().containsKey(username) || !this.fileManager.getCredMap().containsValue(hashedPassword)) {
+//                exit = 1;
+//                System.out.println("Account non trovato!");
+//            }else if(this.accounts[select] != null) {
+//                exit = 2;
+//                System.out.println("Profilo occupato");
+//            }
+//        }
+//        return exit;
+//    }
+    
     public int login(String username, String password, int select) {
-        int exit = 0;
-        String hashedPassword = Hashing.hashString(password);
-        String storedHashedPassword = this.fileManager.getCredMap().get(username);
-
-        if(storedHashedPassword != null && storedHashedPassword.equals(hashedPassword)) {
-            Account toLogin = this.fileManager.getDataMap().get(username);
-            if(!toLogin.isLogged()) {
-                this.accounts[select] = toLogin;
-                toLogin.setLogged(true);
-                this.logged[select] = true;
-                exit = 0;
-                System.out.println("Profilo "+select+" loggato come "+toLogin.getUsername());
-            }else{
-                exit = 3;
-                System.out.println("Account già in uso");
-            }
-        }else{
-            if(!this.fileManager.getCredMap().containsKey(username) || !this.fileManager.getCredMap().containsValue(hashedPassword)) {
-                exit = 1;
-                System.out.println("Account non trovato!");
-            }else if(this.accounts[select] != null) {
-                exit = 2;
-                System.out.println("Profilo occupato");
-            }
-        }
-        return exit;
+    	int exit = 0;
+    	String hashedPassword = Hashing.hashString(password);
+    	String storedHashedPassword = this.fileManager.getCredMap().get(username);
+    	
+    	if(this.fileManager.getCredMap().containsKey(username) && storedHashedPassword.equals(hashedPassword)) {
+    		Account toLogin = this.fileManager.getDataMap().get(username);
+    		if(!toLogin.isLogged()) {
+    			if(this.accounts[select] == null) {
+    				this.accounts[select] = toLogin;
+    				toLogin.setLogged(true);
+    				this.logged[select] = true;
+    				exit = 0;
+    			}else{
+    				System.out.println("Profilo occupato!");
+    				exit = 2;
+    			}
+    		}else{
+    			System.out.println("Account già in uso!");
+    			exit = 3;
+    		}
+    	}else {
+    		System.out.println("Account non trovato!");
+    		exit = 1;
+    	}
+    	
+    	return exit;
     }
 
     public boolean register(String username, String password) throws FileNotFoundException {
         // casistiche di successo: username non è già presente
-        boolean result = this.fileManager.getCredMap().containsKey(username);
-
+        boolean result = false;
 
         // se non c'è
-        if(!result) {
+        if(!this.fileManager.getCredMap().containsKey(username)) {
             String hashedPassword = Hashing.hashString(password);
             int id = this.fileManager.getLastId() + 1;
             Account toRegister = new Account(username, hashedPassword,id);
@@ -63,6 +101,7 @@ public class LoginManager {
             this.fileManager.getDataMap().put(username, toRegister);
             this.fileManager.writeNewFile(toRegister);
             System.out.println("Registrato con successo");
+            result = true;
         }else{
             System.out.println("Username già utilizzato!");
         }
@@ -71,16 +110,16 @@ public class LoginManager {
     
     public boolean registerNoWrite(String username, String password) {
         // casistiche di successo: username non è già presente
-        boolean result = this.fileManager.getCredMap().containsKey(username);
-
+        boolean result = false;
 
         // se non c'è
-        if(!result) {
+        if(!this.fileManager.getCredMap().containsKey(username)) {
             String hashedPassword = Hashing.hashString(password);
             Account toRegister = new Account(username, hashedPassword);
             this.fileManager.getCredMap().put(username, hashedPassword);
             this.fileManager.getDataMap().put(username, toRegister);
             System.out.println("Registrato con successo");
+            result = true;
         }else{
             System.out.println("Username già utilizzato!");
         }
